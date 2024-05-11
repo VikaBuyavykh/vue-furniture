@@ -1,0 +1,79 @@
+@import 'mixinsAndExtensions';
+@import 'variables';
+
+@font-face {
+  font-family: 'Satoshi-Regular';
+  src:
+    url('../fonts/Satoshi-Regular.woff2') format('woff2'),
+    url('../fonts/Satoshi-Regular.woff') format('woff'),
+    url('../fonts/Satoshi-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ClashDisplay-Regular';
+  src:
+    url('../fonts/ClashDisplay-Regular.woff2') format('woff2'),
+    url('../fonts/ClashDisplay-Regular.woff') format('woff'),
+    url('../fonts/ClashDisplay-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+%body-large {
+  font-family: 'Satoshi-Regular', 'Arial', 'Helvetica', sans-serif;
+  @include text(1.125rem, 1.6875rem, $violet-blue, left);
+}
+
+%body-medium {
+  font-family: 'Satoshi-Regular', 'Arial', 'Helvetica', sans-serif;
+  @include text(1rem, 1.5rem, $medium-blue, left);
+}
+
+%logo {
+  font-family: 'ClashDisplay-Regular', 'Arial', 'Helvetica', sans-serif;
+  @include text(1.5rem, 1.845rem, $dark-blue, center);
+}
+
+%ordinary {
+  font-family: 'Satoshi-Regular', 'Arial', 'Helvetica', sans-serif;
+  @include text(1rem, 1.35rem, $violet, center);
+}
+
+%h2 {
+  font-family: 'ClashDisplay-Regular', 'Arial', 'Helvetica', sans-serif;
+  @include text(2rem, 2.8rem, $dark-blue, left);
+}
+
+%h3 {
+  font-family: 'ClashDisplay-Regular', 'Arial', 'Helvetica', sans-serif;
+  @include text(1.5rem, 2.1rem, $medium-blue, left);
+}
+
+%h4 {
+  font-family: 'ClashDisplay-Regular', 'Arial', 'Helvetica', sans-serif;
+  @include text(1.25rem, 1.75rem, $medium-blue, left);
+}
+
+%intro-head {
+  font-family: 'ClashDisplay-Regular', 'Arial', 'Helvetica', sans-serif;
+  @include text(2rem, 2.46rem, white, left);
+}
+
+%intro-text {
+  font-family: 'Satoshi-Regular', 'Arial', 'Helvetica', sans-serif;
+  @include text(1.125rem, 1.51875rem, white, left);
+}
+
+%footer-col-title {
+  font-family: 'ClashDisplay-Regular', 'Arial', 'Helvetica', sans-serif;
+  @include text(1rem, 1.23rem, white, left);
+}
+
+%footer-link {
+  font-family: 'Satoshi-Regular', 'Arial', 'Helvetica', sans-serif;
+  @include text(0.875rem, 1.18125rem, white, left);
+}

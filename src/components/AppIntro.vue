@@ -1,0 +1,64 @@
+<script setup>
+import AppButton from '@/components/UI/AppButton.vue'
+</script>
+
+<template>
+  <section class="intro">
+    <div class="intro__container">
+      <div class="intro__card">
+        <h3 class="intro__title">It started with a small idea</h3>
+        <p class="intro__text">
+          A global brand with local beginnings, our story begain in a small studio in South London
+          in early 2014
+        </p>
+        <app-button class="intro__btn">View collection</app-button>
+      </div>
+      <img class="intro__img" src="@/images/intro.jpg" alt="Decorated room's picture" />
+    </div>
+  </section>
+</template>
+
+<style lang="scss" scoped>
+@import '@/assets/scss/variables.scss';
+@import '@/assets/scss/fonts.scss';
+@import '@/assets/scss/mixinsAndExtensions.scss';
+
+.intro {
+  @include size(100%, auto);
+  padding-block: 60px;
+
+  &__container {
+    @extend %sizing;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 478px;
+    gap: 1rem;
+
+    .intro__card {
+      background-color: $medium-blue;
+      @include size(100%, auto);
+      padding: 64px 75px 54px 64px;
+      @include flex(column, start, start, 12px);
+
+      .intro__title {
+        @extend %intro-head;
+      }
+
+      .intro__text {
+        @extend %intro-text;
+      }
+
+      .intro__btn {
+        margin-top: auto;
+        background-color: rgba($light-grey, 0.15);
+        color: white;
+      }
+    }
+
+    .intro__img {
+      @include size(100%, 100%);
+      @extend %pic;
+    }
+  }
+}
+</style>
