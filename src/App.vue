@@ -1,23 +1,26 @@
 <script setup>
+import { provide, ref } from 'vue'
 import AppHeader from '@/components/AppHeader.vue'
-import AppCover from '@/components/AppCover.vue'
-import AppFeatures from '@/components/AppFeatures.vue'
-import AppProducts from '@/components/AppProducts.vue'
-import AppIntro from '@/components/AppIntro.vue'
-import AppInvitation from '@/components/AppInvitation.vue'
 import AppFooter from '@/components/AppFooter.vue'
+
+const isAboutPage = ref(false)
+const isListingPage = ref(false)
+
+function setIsAboutPage(value) {
+  isAboutPage.value = value
+}
+
+function setIsListingPage(value) {
+  isListingPage.value = value
+}
+
+provide('app', { setIsAboutPage, setIsListingPage })
 </script>
 
 <template>
   <div class="page">
-    <app-header></app-header>
-    <main class="main">
-      <app-cover></app-cover>
-      <app-features></app-features>
-      <app-products></app-products>
-      <app-intro></app-intro>
-      <app-invitation></app-invitation>
-    </main>
+    <app-header :isAboutPage="isAboutPage" :isListingPage="isListingPage"></app-header>
+    <router-view></router-view>
     <app-footer></app-footer>
   </div>
 </template>

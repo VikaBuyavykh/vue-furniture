@@ -77,3 +77,8 @@
   font-family: 'Satoshi-Regular', 'Arial', 'Helvetica', sans-serif;
   @include text(0.875rem, 1.18125rem, white, left);
 }
+
+%tagline {
+  font-family: 'ClashDisplay-Regular', 'Arial', 'Helvetica', sans-serif;
+  @include text(2.25rem, 3.15rem, $medium-blue, center);
+}
