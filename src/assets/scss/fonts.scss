@@ -82,3 +82,23 @@
   font-family: 'ClashDisplay-Regular', 'Arial', 'Helvetica', sans-serif;
   @include text(2.25rem, 3.15rem, $medium-blue, center);
 }
+
+%prod-name {
+  font-family: 'ClashDisplay-Regular', 'Arial', 'Helvetica', sans-serif;
+  @include text(2.25rem, 2.7675rem, $medium-blue, left);
+}
+
+%prod-price {
+  font-family: 'ClashDisplay-Regular', 'Arial', 'Helvetica', sans-serif;
+  @include text(1.5rem, 2.025rem, $medium-blue, left);
+}
+
+%prod-sec-title {
+  font-family: 'ClashDisplay-Regular', 'Arial', 'Helvetica', sans-serif;
+  @include text(1rem, 1.23rem, $medium-blue, left);
+}
+
+%prod-dims-value {
+  font-family: 'ClashDisplay-Regular', 'Arial', 'Helvetica', sans-serif;
+  @include text(0.875rem, 1.076rem, $medium-blue, center);
+}

@@ -1,5 +1,8 @@
 <script setup>
 import { inject, onMounted, onUnmounted } from 'vue'
+import AppProduct from '@/components/AppProduct.vue'
+import AppRecommendation from '@/components/AppRecommendation.vue'
+import AppFeatures from '@/components/AppFeatures.vue'
 
 const { setIsListingPage } = inject('app')
 
@@ -14,7 +17,9 @@ onUnmounted(() => {
 
 <template>
   <main class="main">
-    <h2>Product Listing Page</h2>
+    <app-product></app-product>
+    <app-recommendation></app-recommendation>
+    <app-features></app-features>
   </main>
 </template>
 
