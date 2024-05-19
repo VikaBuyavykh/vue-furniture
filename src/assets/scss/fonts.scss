@@ -43,6 +43,11 @@
   @include text(1rem, 1.35rem, $violet, center);
 }
 
+%h1 {
+  font-family: 'ClashDisplay-Regular', 'Arial', 'Helvetica', sans-serif;
+  @include text(2.25rem, 3.15rem, white, left);
+}
+
 %h2 {
   font-family: 'ClashDisplay-Regular', 'Arial', 'Helvetica', sans-serif;
   @include text(2rem, 2.8rem, $dark-blue, left);

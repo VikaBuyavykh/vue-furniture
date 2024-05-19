@@ -21,7 +21,7 @@ provide('app', { setIsAboutPage, setIsListingPage })
   <div class="page">
     <app-header :isAboutPage="isAboutPage" :isListingPage="isListingPage"></app-header>
     <router-view></router-view>
-    <app-footer></app-footer>
+    <app-footer :isListingPage="isListingPage"></app-footer>
   </div>
 </template>
 

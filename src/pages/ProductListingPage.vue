@@ -3,6 +3,7 @@ import { inject, onMounted, onUnmounted } from 'vue'
 import AppProduct from '@/components/AppProduct.vue'
 import AppRecommendation from '@/components/AppRecommendation.vue'
 import AppFeatures from '@/components/AppFeatures.vue'
+import AppListingInvitation from '@/components/AppListingInvitation.vue'
 
 const { setIsListingPage } = inject('app')
 
@@ -20,6 +21,7 @@ onUnmounted(() => {
     <app-product></app-product>
     <app-recommendation></app-recommendation>
     <app-features></app-features>
+    <app-listing-invitation></app-listing-invitation>
   </main>
 </template>
 
