@@ -68,6 +68,11 @@
   @include text(1.25rem, 1.75rem, $medium-blue, left);
 }
 
+%h5 {
+  font-family: 'ClashDisplay-Regular', 'Arial', 'Helvetica', sans-serif;
+  @include text(1rem, 1.4rem, $medium-blue, left);
+}
+
 %h6 {
   font-family: 'ClashDisplay-Regular', 'Arial', 'Helvetica', sans-serif;
   @include text(0.875rem, 1.225rem, $medium-blue, left);
