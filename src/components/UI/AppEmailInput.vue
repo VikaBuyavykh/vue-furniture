@@ -56,10 +56,20 @@ defineProps({
     background-color: $medium-blue;
     @extend %body-medium;
     color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: $violet;
+    }
 
     &_dark {
       background-color: #fff;
       color: $medium-blue;
+
+      &:hover {
+        color: white;
+      }
     }
   }
 }

@@ -16,5 +16,12 @@
   background-color: $light-grey;
   padding: 16px 32px;
   @extend %body-medium;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 2px 2px 10px rgba(grey, 0.2);
+  }
 }
 </style>

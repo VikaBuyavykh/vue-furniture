@@ -28,8 +28,8 @@ defineProps({
             <h3 class="footer__socials-title">Social links</h3>
             <ul class="footer__socials">
               <li v-for="item in socials" :key="item.img" class="footer__socials-item">
-                <a class="footer__socials-link" :href="item.link">
-                  <img class="footer__link-img" :src="item.img" :alt="item.alt" />
+                <a :href="item.link">
+                  <img :src="item.img" :alt="item.alt" />
                 </a>
               </li>
             </ul>
@@ -75,6 +75,12 @@ defineProps({
 
   .footer__socials-item {
     @include size(1.5rem, 1.5rem);
+    transition: all 0.2s ease;
+
+    &:hover {
+      opacity: 0.6;
+      transform: scale(0.9);
+    }
   }
 }
 
@@ -151,6 +157,12 @@ defineProps({
             .footer__link {
               text-decoration: none;
               @extend %footer-link;
+              transition: all 0.2s ease;
+
+              &:hover {
+                opacity: 0.5;
+                text-decoration: underline;
+              }
             }
           }
         }

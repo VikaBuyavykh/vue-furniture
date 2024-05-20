@@ -27,6 +27,20 @@ defineProps({
   @include size(100%, auto);
   @include flex(column, start, start, 0px);
   cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    transform: scale(1.01);
+  }
+
+  &:hover img {
+    box-shadow: 2px 2px 5px rgba(grey, 0.3);
+  }
+
+  &:hover h4,
+  &:hover p {
+    opacity: 0.7;
+  }
 
   &_horizontal {
     grid-column: span 2;
@@ -35,16 +49,19 @@ defineProps({
   &__img {
     @include size(100%, 375px);
     @extend %pic;
+    transition: all 0.15s ease;
   }
 
   &__name {
     @extend %h4;
     margin-block: 1.5rem 0.5rem;
+    transition: all 0.15s ease;
   }
 
   &__price {
     @extend %body-large;
     color: $medium-blue;
+    transition: all 0.15s ease;
   }
 }
 </style>

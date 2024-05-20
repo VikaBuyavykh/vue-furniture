@@ -9,12 +9,27 @@ defineProps({
 })
 
 const searchQuery = ref('')
+const isCartHovered = ref(false)
+const isProfileHovered = ref(false)
+const isLoupeHovered = ref(false)
 
 function search() {
   router.push('/collection')
   setTimeout(() => {
     document.querySelector('#search').focus()
   }, 0)
+}
+
+function hoverCart() {
+  isCartHovered.value = !isCartHovered.value
+}
+
+function hoverProfile() {
+  isProfileHovered.value = !isProfileHovered.value
+}
+
+function hoverLoupe() {
+  isLoupeHovered.value = !isLoupeHovered.value
 }
 </script>
 
@@ -25,7 +40,13 @@ function search() {
       :class="{ header__row_about: isAboutPage, header__row_listing: isListingPage }"
     >
       <div class="header__input-box" v-if="!isAboutPage && !isListingPage">
-        <img class="header__input-btn" src="/search.svg" alt="Icon of search-button" />
+        <img
+          @mouseenter="hoverLoupe"
+          @mouseleave="hoverLoupe"
+          class="header__input-btn"
+          :src="isLoupeHovered ? '/search-active.svg' : '/search.svg'"
+          alt="Icon of search-button"
+        />
         <input
           v-model="searchQuery"
           class="header__input"
@@ -62,14 +83,38 @@ function search() {
           <router-link class="header__menu-item" to="#">Contact</router-link>
           <router-link class="header__menu-item" to="#">Blog</router-link>
         </nav>
-        <button @click="search" v-if="isAboutPage" class="header__btn">
-          <img class="header__btn-img" src="/search.svg" alt="Cart of search" />
+        <button
+          @mouseenter="hoverLoupe"
+          @mouseleave="hoverLoupe"
+          @click="search"
+          v-if="isAboutPage"
+          class="header__btn"
+        >
+          <img
+            class="header__btn-img"
+            :src="isLoupeHovered ? '/search-active.svg' : '/search.svg'"
+            alt="Cart of search"
+          />
         </button>
-        <button class="header__btn" type="button" @click="() => router.push('/basket')">
-          <img class="header__btn-img" src="/cart.svg" alt="Cart icon" />
+        <button
+          @mouseenter="hoverCart"
+          @mouseleave="hoverCart"
+          class="header__btn"
+          type="button"
+          @click="() => router.push('/basket')"
+        >
+          <img
+            class="header__btn-img"
+            :src="isCartHovered ? '/cart-active.svg' : '/cart.svg'"
+            alt="Cart icon"
+          />
         </button>
-        <button class="header__btn">
-          <img class="header__btn-img" src="/profile.svg" alt="Profile icon" />
+        <button @mouseenter="hoverProfile" @mouseleave="hoverProfile" class="header__btn">
+          <img
+            class="header__btn-img"
+            :src="isProfileHovered ? '/profile-active.svg' : '/profile.svg'"
+            alt="Profile icon"
+          />
         </button>
       </div>
     </div>
@@ -121,6 +166,7 @@ function search() {
 
       .header__input-btn {
         @include size(1rem, 1rem);
+        cursor: pointer;
       }
 
       .header__input {
@@ -139,6 +185,12 @@ function search() {
 
     .header__name {
       @extend %logo;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        color: $violet;
+      }
 
       &_about {
         grid-area: 1 / 1 / 2 / 2;
@@ -161,13 +213,18 @@ function search() {
         .header__menu-item {
           @extend %ordinary;
           text-decoration: none;
+          transition: all 0.2s ease;
+
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
 
       .header__btn {
-        background-color: transparent;
         @extend %resetInputsAndBtns;
         @include size(1rem, 1rem);
+        cursor: pointer;
       }
     }
   }
@@ -192,6 +249,12 @@ function search() {
         .header__nav-list-link {
           text-decoration: none;
           @extend %ordinary;
+          transition: all 0.2s ease;
+
+          &:hover {
+            text-decoration: underline;
+            opacity: 0.7;
+          }
         }
       }
     }
