@@ -4,7 +4,7 @@ import benefits from '@/utils/benefits'
 </script>
 
 <template>
-  <section class="invitation">
+  <section class="invitation" id="invitation">
     <app-invitation-content>
       <ul class="invitation__benefits">
         <li v-for="item in benefits" :key="item" class="invitation__benefit">

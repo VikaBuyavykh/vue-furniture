@@ -4,23 +4,23 @@ const sections = [
     list: [
       {
         name: 'New arrivals',
-        link: '#'
+        link: '/collection'
       },
       {
         name: 'Best sellers',
-        link: '#'
+        link: '/collection'
       },
       {
         name: 'Recently viewed',
-        link: '#'
+        link: '/collection'
       },
       {
         name: 'Popular this week',
-        link: '#'
+        link: '/collection'
       },
       {
         name: 'All products',
-        link: '#'
+        link: '/collection'
       }
     ]
   },
@@ -29,27 +29,27 @@ const sections = [
     list: [
       {
         name: 'Crockery',
-        link: '#'
+        link: '/collection'
       },
       {
         name: 'Furniture',
-        link: '#'
+        link: '/collection'
       },
       {
         name: 'Homeware',
-        link: '#'
+        link: '/collection'
       },
       {
         name: 'Plant pots',
-        link: '#'
+        link: '/collection'
       },
       {
         name: 'Chairs',
-        link: '#'
+        link: '/collection'
       },
       {
         name: 'Crockery',
-        link: '#'
+        link: '/collection'
       }
     ]
   },
@@ -58,23 +58,23 @@ const sections = [
     list: [
       {
         name: 'About us',
-        link: '#'
+        link: '/about'
       },
       {
         name: 'Vacancies',
-        link: '#'
+        link: '/about'
       },
       {
         name: 'Contact us',
-        link: '#'
+        link: '/about'
       },
       {
         name: 'Privacy',
-        link: '#'
+        link: '/about'
       },
       {
         name: 'Returns policy',
-        link: '#'
+        link: '/about'
       }
     ]
   }

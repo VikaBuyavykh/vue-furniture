@@ -1,5 +1,6 @@
 <script setup>
 import AppButton from '@/components/UI/AppButton.vue'
+import router from '@/router'
 </script>
 
 <template>
@@ -8,7 +9,9 @@ import AppButton from '@/components/UI/AppButton.vue'
       <div class="cover__content">
         <h2 class="cover__title">Luxury homeware for people who love timeless design quality</h2>
         <p class="cover__decs">Shop the new Spring 2022 collection today</p>
-        <app-button class="cover__btn">View collection</app-button>
+        <app-button @click="() => router.push('/collection')" class="cover__btn"
+          >View collection</app-button
+        >
       </div>
     </div>
   </section>

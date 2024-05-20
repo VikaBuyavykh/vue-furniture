@@ -40,7 +40,7 @@ defineProps({
             <h5 class="footer__col-title">{{ section.section }}</h5>
             <ul class="footer__col-links">
               <li class="footer__links-item" v-for="item in section.list" :key="item.name">
-                <a class="footer__link" :href="item.link">{{ item.name }}</a>
+                <router-link class="footer__link" :to="item.link">{{ item.name }}</router-link>
               </li>
             </ul>
           </li>

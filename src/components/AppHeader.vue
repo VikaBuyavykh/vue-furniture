@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import navLinks from '@/utils/navLinks'
+import router from '@/router'
 
 defineProps({
   isAboutPage: Boolean,
@@ -8,6 +9,13 @@ defineProps({
 })
 
 const searchQuery = ref('')
+
+function search() {
+  router.push('/collection')
+  setTimeout(() => {
+    document.querySelector('#search').focus()
+  }, 0)
+}
 </script>
 
 <template>
@@ -26,10 +34,16 @@ const searchQuery = ref('')
           id="search"
         />
       </div>
-      <h1 class="header__name" :class="{ header__name_about: isAboutPage }">Avion</h1>
+      <h1
+        @click="() => router.push('/')"
+        class="header__name"
+        :class="{ header__name_about: isAboutPage }"
+      >
+        Avion
+      </h1>
       <ul v-if="isListingPage" class="header__nav-list">
         <li v-for="link in navLinks" :key="link.name" class="header__nav-list-item">
-          <a class="header__nav-list-link" :href="link.link">{{ link.name }}</a>
+          <router-link class="header__nav-list-link" :to="link.link">{{ link.name }}</router-link>
         </li>
       </ul>
       <div class="header__buttons" :class="{ header__buttons_about: isAboutPage }">
@@ -48,10 +62,10 @@ const searchQuery = ref('')
           <router-link class="header__menu-item" to="#">Contact</router-link>
           <router-link class="header__menu-item" to="#">Blog</router-link>
         </nav>
-        <button v-if="isAboutPage" class="header__btn">
+        <button @click="search" v-if="isAboutPage" class="header__btn">
           <img class="header__btn-img" src="/search.svg" alt="Cart of search" />
         </button>
-        <button class="header__btn">
+        <button class="header__btn" type="button" @click="() => router.push('/basket')">
           <img class="header__btn-img" src="/cart.svg" alt="Cart icon" />
         </button>
         <button class="header__btn">

@@ -1,5 +1,7 @@
 <script setup>
 import AppButton from '@/components/UI/AppButton.vue'
+import AppCard from '@/components/UI/AppCard.vue'
+import router from '@/router'
 import products from '@/utils/products'
 </script>
 
@@ -7,15 +9,18 @@ import products from '@/utils/products'
   <section class="products">
     <div class="products__container">
       <ul class="products__list">
-        <li v-for="item in products" :key="item.name" class="products__list-item">
-          <img class="products__list-item-img" :src="item.img" :alt="item.alt" />
-          <div class="products__list-item-text">
-            <h4 class="products__list-item-name">{{ item.name }}</h4>
-            <p class="products__list-item-price">{{ item.price }}</p>
-          </div>
-        </li>
+        <app-card
+          v-for="item in products"
+          :key="item.name"
+          :img="item.img"
+          :alt="item.alt"
+          :name="item.name"
+          :price="item.price"
+          :horizontal="item.horizontal"
+        >
+        </app-card>
       </ul>
-      <app-button>View collection</app-button>
+      <app-button @click="() => router.push('/collection')">View collection</app-button>
     </div>
   </section>
 </template>
@@ -38,30 +43,6 @@ import products from '@/utils/products'
       @include size(100%, auto);
       display: grid;
       @extend %grid;
-
-      &-item {
-        @include size(100%, auto);
-        display: grid;
-        grid-template-rows: 375px auto;
-        gap: 24px;
-
-        &-img {
-          @include size(100%, 100%);
-          @extend %pic;
-        }
-
-        &-text {
-          @include flex(column, start, start, 8px);
-
-          .products__list-item-name {
-            @extend %h4;
-          }
-
-          .products__list-item-price {
-            @extend %body-large;
-          }
-        }
-      }
     }
   }
 }

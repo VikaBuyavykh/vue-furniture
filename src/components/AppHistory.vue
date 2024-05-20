@@ -1,5 +1,10 @@
 <script setup>
 import AppButton from '@/components/UI/AppButton.vue'
+
+function getInTouch() {
+  document.querySelector('#invitation').scrollIntoView({ behavior: 'smooth', block: 'center' })
+  document.querySelector('#email').focus()
+}
 </script>
 
 <template>
@@ -15,7 +20,7 @@ import AppButton from '@/components/UI/AppButton.vue'
           homeware is what we live, breathe and design so our Chelsea boutique become the hotbed for
           the London interior design community.
         </p>
-        <app-button class="history__btn">Get in touch</app-button>
+        <app-button @click="getInTouch" class="history__btn">Get in touch</app-button>
       </li>
       <li class="history__img-box">
         <img
@@ -41,7 +46,7 @@ import AppButton from '@/components/UI/AppButton.vue'
           homeware is what we live, breathe and design so our Chelsea boutique become the hotbed for
           the London interior design community.
         </p>
-        <app-button class="history__btn">Get in touch</app-button>
+        <app-button @click="getInTouch" class="history__btn">Get in touch</app-button>
       </li>
     </ul>
   </section>

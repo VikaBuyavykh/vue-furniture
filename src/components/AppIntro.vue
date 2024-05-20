@@ -1,5 +1,6 @@
 <script setup>
 import AppButton from '@/components/UI/AppButton.vue'
+import router from '@/router'
 </script>
 
 <template>
@@ -11,7 +12,9 @@ import AppButton from '@/components/UI/AppButton.vue'
           A global brand with local beginnings, our story begain in a small studio in South London
           in early 2014
         </p>
-        <app-button class="intro__btn">View collection</app-button>
+        <app-button @click="() => router.push('collection')" class="intro__btn"
+          >View collection</app-button
+        >
       </div>
       <img class="intro__img" src="@/images/intro.jpg" alt="Decorated room's picture" />
     </div>

@@ -2,6 +2,7 @@
 import AppButton from '@/components/UI/AppButton.vue'
 import recommendation from '@/utils/recommendation'
 import AppCard from '@/components/UI/AppCard.vue'
+import router from '@/router'
 </script>
 
 <template>
@@ -19,7 +20,9 @@ import AppCard from '@/components/UI/AppCard.vue'
           :horizontal="item.horizontal"
         ></app-card>
       </ul>
-      <app-button class="recommendation__btn">See collection</app-button>
+      <app-button @click="() => router.push('/collection')" class="recommendation__btn"
+        >See collection</app-button
+      >
     </div>
   </section>
 </template>

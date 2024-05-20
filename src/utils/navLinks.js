@@ -1,31 +1,31 @@
 const navLinks = [
   {
     name: 'Plant pots',
-    link: '#'
+    link: '/collection'
   },
   {
     name: 'Ceramics',
-    link: '#'
+    link: '/collection'
   },
   {
     name: 'Tables',
-    link: '#'
+    link: '/collection'
   },
   {
     name: 'Chairs',
-    link: '#'
+    link: '/collection'
   },
   {
     name: 'Crockery',
-    link: '#'
+    link: '/collection'
   },
   {
     name: 'Tableware',
-    link: '#'
+    link: '/collection'
   },
   {
     name: 'Cutlery',
-    link: '#'
+    link: '/collection'
   }
 ]
 
