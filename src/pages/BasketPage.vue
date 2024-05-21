@@ -154,6 +154,11 @@ import basket from '@/utils/basket'
         .basket__btn {
           background-color: $medium-blue;
           color: white;
+          transition: all 0.2s ease;
+
+          &:hover {
+            background-color: rgba($medium-blue, 0.8);
+          }
         }
       }
     }

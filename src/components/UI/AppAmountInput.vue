@@ -27,10 +27,28 @@
   input {
     @include size(22px, auto);
     color: $medium-blue;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+
+    &,
+    &:hover,
+    &:focus {
+      appearance: none;
+      -moz-appearance: textfield;
+    }
   }
 
   button {
     color: $border-grey;
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      color: rgba($violet, 0.8);
+    }
   }
 }
 </style>

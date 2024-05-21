@@ -48,6 +48,11 @@ import router from '@/router'
 
       .cover__btn {
         margin-top: auto;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background-color: rgba($violet, 0.2);
+        }
       }
     }
   }

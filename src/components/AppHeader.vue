@@ -69,7 +69,13 @@ function hoverLoupe() {
       </ul>
       <div class="header__buttons" :class="{ header__buttons_about: isAboutPage }">
         <div class="header__input-box header__input-box_listing" v-if="isListingPage">
-          <img class="header__input-btn" src="/search.svg" alt="Icon of search-button" />
+          <img
+            @mouseenter="hoverLoupe"
+            @mouseleave="hoverLoupe"
+            class="header__input-btn"
+            :src="isLoupeHovered ? '/search-active.svg' : '/search.svg'"
+            alt="Icon of search-button"
+          />
           <input
             v-model="searchQuery"
             class="header__input"
@@ -217,6 +223,7 @@ function hoverLoupe() {
 
           &:hover {
             text-decoration: underline;
+            opacity: 0.7;
           }
         }
       }

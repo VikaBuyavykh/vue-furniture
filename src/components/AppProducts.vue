@@ -20,7 +20,9 @@ import products from '@/utils/products'
         >
         </app-card>
       </ul>
-      <app-button @click="() => router.push('/collection')">View collection</app-button>
+      <app-button class="products__btn" @click="() => router.push('/collection')"
+        >View collection</app-button
+      >
     </div>
   </section>
 </template>
@@ -43,6 +45,14 @@ import products from '@/utils/products'
       @include size(100%, auto);
       display: grid;
       @extend %grid;
+    }
+
+    .products__btn {
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: rgba($violet, 0.2);
+      }
     }
   }
 }

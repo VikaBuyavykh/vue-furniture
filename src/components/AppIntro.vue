@@ -55,6 +55,11 @@ import router from '@/router'
         margin-top: auto;
         background-color: rgba($light-grey, 0.15);
         color: white;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background-color: rgba($light-grey, 0.35);
+        }
       }
     }
 

@@ -157,13 +157,23 @@ import AppAmountInput from '@/components/UI/AppAmountInput.vue'
         @include flex(row, start, center, 1rem);
 
         button {
+          transition: all 0.2s ease;
+
           &:first-of-type {
             background-color: $medium-blue;
             color: white;
+
+            &:hover {
+              background-color: rgba($medium-blue, 0.8);
+            }
           }
 
           &:last-of-type {
             background-color: white;
+
+            &:hover {
+              background-color: rgba($violet, 0.2);
+            }
           }
         }
       }

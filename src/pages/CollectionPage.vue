@@ -40,7 +40,7 @@ import filters from '@/utils/filters'
             :horizontal="item.horizontal"
           ></app-card>
         </ul>
-        <app-button>Load more</app-button>
+        <app-button class="collection__btn">Load more</app-button>
       </div>
     </section>
   </main>
@@ -107,11 +107,18 @@ import filters from '@/utils/filters'
             @extend %body-medium;
             @include flex(row, start, center, 0.75rem);
             cursor: pointer;
+            transition: all 0.2s ease;
+
+            &:hover {
+              opacity: 0.6;
+              text-decoration: underline;
+            }
 
             span {
               @include size(1rem, 1rem);
               border: 1px solid #dcdcdc;
               border-radius: 2px;
+              transition: all 0.2s ease;
             }
 
             input[type='checkbox']:checked + span,
@@ -119,6 +126,11 @@ import filters from '@/utils/filters'
               background-image: url('/stick.svg');
               @extend %bgi;
               border: none;
+            }
+
+            input[type='checkbox']:hover + span,
+            input[type='radio']:hover + span {
+              border-color: rgba($violet, 0.8);
             }
           }
         }
@@ -135,6 +147,14 @@ import filters from '@/utils/filters'
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(auto-fit, 1fr);
         gap: 2.25rem 1.25rem;
+      }
+
+      .collection__btn {
+        transition: all 0.2s ease;
+
+        &:hover {
+          background-color: rgba($violet, 0.2);
+        }
       }
     }
   }

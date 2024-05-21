@@ -54,6 +54,11 @@ import router from '@/router'
 
     .recommendation__btn {
       align-self: center;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: rgba($violet, 0.2);
+      }
     }
   }
 }
