@@ -35,6 +35,10 @@ defineProps({
   @include size(100%, auto);
   padding-block: 80px;
 
+  @include media_md {
+    padding-block: 48px;
+  }
+
   &_about {
     padding-block: 60px 86px;
   }
@@ -50,6 +54,16 @@ defineProps({
     .features__list {
       @include size(100%, auto);
       @extend %grid;
+
+      @include media_lg {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+      }
+
+      @include media_sm {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 1fr);
+      }
 
       &-item {
         background-color: $light-grey;

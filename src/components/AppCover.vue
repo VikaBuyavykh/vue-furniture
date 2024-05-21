@@ -5,6 +5,7 @@ import router from '@/router'
 
 <template>
   <section class="cover">
+    <div class="cover__img"></div>
     <div class="cover__container">
       <div class="cover__content">
         <h2 class="cover__title">Luxury homeware for people who love timeless design quality</h2>
@@ -24,12 +25,32 @@ import router from '@/router'
 
 .cover {
   @include size(100%, auto);
-  background-image: url('@/images/cover.jpg');
-  @extend %bgi;
   padding-block: 80px;
+  position: relative;
+
+  @include media_md {
+    @include flex(column, start, stretch, 0);
+    padding: 0;
+  }
+
+  &__img {
+    position: absolute;
+    inset: 0;
+    background-image: url('@/images/cover.jpg');
+    @extend %bgi;
+    z-index: 1;
+
+    @include media_md {
+      position: unset;
+      @include size(100%, 304px);
+      order: 2;
+    }
+  }
 
   &__container {
     @extend %sizing;
+    position: relative;
+    z-index: 2;
 
     .cover__content {
       margin-left: auto;
@@ -37,6 +58,15 @@ import router from '@/router'
       @include size(50%, 444px);
       @include flex(column, start, start, 20px);
       padding: 47px 60px;
+
+      @include media_lg {
+        height: fit-content;
+      }
+
+      @include media_md {
+        width: 100%;
+        padding: 47px 0px 32px;
+      }
 
       .cover__title {
         @extend %h2;
@@ -49,6 +79,10 @@ import router from '@/router'
       .cover__btn {
         margin-top: auto;
         transition: all 0.2s ease;
+
+        @include media_xs {
+          width: 100%;
+        }
 
         &:hover {
           background-color: rgba($violet, 0.2);
