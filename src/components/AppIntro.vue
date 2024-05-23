@@ -28,7 +28,7 @@ import router from '@/router'
 
 .intro {
   @include size(100%, auto);
-  padding-block: 60px;
+  padding-block: 3.75rem;
 
   @include media_md {
     padding-block: 2rem;
@@ -43,14 +43,15 @@ import router from '@/router'
 
     @include media_md {
       grid-template-columns: 1fr;
-      grid-template-rows: repeat(2, minmax(281px, max-content));
+      grid-template-rows: repeat(2, minmax(min-content, max-content));
+      gap: 1.5rem;
     }
 
     .intro__card {
       background-color: $medium-blue;
       @include size(100%, auto);
       padding: 64px 75px 54px 64px;
-      @include flex(column, start, start, 12px);
+      @include flex(column, start, start, 0.75rem);
 
       @include media_md {
         padding: 2.25rem 2rem 1.875rem;
@@ -58,10 +59,20 @@ import router from '@/router'
 
       .intro__title {
         @extend %intro-head;
+
+        @include media_md {
+          font-size: 1.25rem;
+          line-height: 1.75rem;
+        }
       }
 
       .intro__text {
         @extend %intro-text;
+
+        @include media_md {
+          font-size: 0.875rem;
+          line-height: 1.3125rem;
+        }
       }
 
       .intro__btn {
@@ -69,6 +80,10 @@ import router from '@/router'
         background-color: rgba($light-grey, 0.15);
         color: white;
         transition: all 0.2s ease;
+
+        @include media_md {
+          margin-top: 2.75rem;
+        }
 
         @include media_xs {
           width: 100%;
@@ -83,6 +98,10 @@ import router from '@/router'
     .intro__img {
       @include size(100%, 100%);
       @extend %pic;
+
+      @include media_md {
+        height: 259px;
+      }
     }
   }
 }

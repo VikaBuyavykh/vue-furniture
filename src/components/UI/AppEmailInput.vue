@@ -30,6 +30,10 @@ defineProps({
   display: grid;
   grid-template-columns: auto max-content;
 
+  @include media_md {
+    width: 100%;
+  }
+
   .email-input {
     @extend %resetInputsAndBtns;
     background-color: #fff;

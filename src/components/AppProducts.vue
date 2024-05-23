@@ -35,15 +35,19 @@ import products from '@/utils/products'
 
 .products {
   @include size(100%, auto);
-  padding-block: 28px 40px;
+  padding-block: 2.75rem 2.5rem;
 
   @include media_md {
-    padding-block: 24px 28px;
+    padding-block: 1.5rem 1.75rem;
   }
 
   &__container {
     @extend %sizing;
-    @include flex(column, start, center, 48px);
+    @include flex(column, start, center, 3rem);
+
+    @include media_lg {
+      gap: 2.5rem;
+    }
 
     .products__list {
       list-style-type: none;
@@ -54,6 +58,7 @@ import products from '@/utils/products'
       @include media_lg {
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(2, 1fr);
+        gap: 1.25rem 1rem;
       }
     }
 

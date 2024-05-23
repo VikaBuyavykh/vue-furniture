@@ -71,6 +71,10 @@
   @include size(90%, auto);
   max-width: 1280px;
   margin: 0 auto;
+
+  @include media_xs {
+    width: 88%;
+  }
 }
 
 %grid {

@@ -14,7 +14,7 @@
 .btn {
   @extend %resetInputsAndBtns;
   background-color: $light-grey;
-  padding: 16px 32px;
+  padding: 1rem 2rem;
   @extend %body-medium;
   text-align: center;
   cursor: pointer;

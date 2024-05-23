@@ -32,23 +32,24 @@ import benefits from '@/utils/benefits'
   }
 
   .invitation__benefits {
-    margin-block: 30px 40px;
+    margin-block: 1.875rem 2.5rem;
     list-style-type: none;
-    @include flex(row, center, center, 36px);
+    @include flex(row, center, center, 2.25rem);
 
     @include media_md {
       flex-direction: column;
       align-items: start;
       gap: 0.5rem;
+      margin-block: 1.25rem 1.75rem;
     }
 
     .invitation__benefit {
-      @include flex(row, start, center, 4px);
+      @include flex(row, start, center, 0.25rem);
       @extend %body-medium;
       color: white;
 
       &-icon {
-        @include size(16px, 16px);
+        @include size(1rem, 1rem);
       }
     }
   }

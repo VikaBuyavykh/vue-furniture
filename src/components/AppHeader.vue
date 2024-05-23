@@ -188,11 +188,12 @@ function hoverMenu() {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
-    padding-block: 20px;
+    padding-block: 1.25rem;
     border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
 
     @include media_lg {
       border: none;
+      width: 89.23%;
     }
 
     &_about {
@@ -250,6 +251,10 @@ function hoverMenu() {
     .header__buttons {
       justify-self: end;
       @include flex(row, end, center, 1rem);
+
+      @include media_lg {
+        gap: 1.25rem;
+      }
 
       &_about {
         grid-area: 1 / 2 / 2 / 4;

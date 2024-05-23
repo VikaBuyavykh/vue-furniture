@@ -1,6 +1,8 @@
 <script setup>
+import { useMediaQuery } from '@vueuse/core'
 import AppButton from '@/components/UI/AppButton.vue'
 import router from '@/router'
+const isLargeScreenSize = useMediaQuery('(min-width: 801px)')
 </script>
 
 <template>
@@ -9,7 +11,13 @@ import router from '@/router'
     <div class="cover__container">
       <div class="cover__content">
         <h2 class="cover__title">Luxury homeware for people who love timeless design quality</h2>
-        <p class="cover__decs">Shop the new Spring 2022 collection today</p>
+        <p class="cover__decs" v-if="isLargeScreenSize">
+          Shop the new Spring 2022 collection today
+        </p>
+        <p class="cover__decs" v-else>
+          With our new collection, view over 400 bespoke pieces from homeware through to furniture
+          today
+        </p>
         <app-button @click="() => router.push('/collection')" class="cover__btn"
           >View collection</app-button
         >
@@ -25,7 +33,7 @@ import router from '@/router'
 
 .cover {
   @include size(100%, auto);
-  padding-block: 80px;
+  padding-block: 130px;
   position: relative;
 
   @include media_md {
@@ -55,8 +63,8 @@ import router from '@/router'
     .cover__content {
       margin-left: auto;
       background-color: #fff;
-      @include size(50%, 444px);
-      @include flex(column, start, start, 20px);
+      @include size(49.25%, 444px);
+      @include flex(column, start, start, 1.25rem);
       padding: 47px 60px;
 
       @include media_lg {
@@ -66,19 +74,34 @@ import router from '@/router'
       @include media_md {
         width: 100%;
         padding: 47px 0px 32px;
+        gap: 0.75rem;
       }
 
       .cover__title {
         @extend %h2;
+
+        @include media_md {
+          font-size: 1.5rem;
+          line-height: 1.845rem;
+        }
       }
 
       .cover__decs {
         @extend %body-large;
+
+        @include media_md {
+          font-size: 1rem;
+          line-height: 1.35rem;
+        }
       }
 
       .cover__btn {
         margin-top: auto;
         transition: all 0.2s ease;
+
+        @include media_md {
+          margin-top: 1.25rem;
+        }
 
         @include media_xs {
           width: 100%;

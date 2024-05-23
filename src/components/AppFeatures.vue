@@ -36,7 +36,7 @@ defineProps({
   padding-block: 80px;
 
   @include media_md {
-    padding-block: 48px;
+    padding-block: 3rem;
   }
 
   &_about {
@@ -47,8 +47,22 @@ defineProps({
     @extend %sizing;
     @include flex(column, start, center, 36px);
 
+    @include media_sm {
+      gap: 2.25rem;
+    }
+
     .features__title {
       @extend %h3;
+
+      @include media_md {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+      }
+
+      @include media_sm {
+        align-self: start;
+        width: 79.8%;
+      }
     }
 
     .features__list {
@@ -63,12 +77,17 @@ defineProps({
       @include media_sm {
         grid-template-columns: 1fr;
         grid-template-rows: repeat(4, 1fr);
+        gap: 1.625rem;
       }
 
       &-item {
         background-color: $light-grey;
         padding: 48px;
         @include flex(column, start, start, 12px);
+
+        @include media_sm {
+          padding: 2.25rem 1.5rem;
+        }
 
         &_about {
           background-color: transparent;

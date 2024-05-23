@@ -105,7 +105,7 @@ defineProps({
 
       @include media_md {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 0.5rem;
         padding-block: 2.5rem 1rem;
       }
 
@@ -136,7 +136,7 @@ defineProps({
 
         .footer__socials-group {
           @include size(100%, auto);
-          @include flex(column, start, start, 22px);
+          @include flex(column, start, start, 1.375rem);
 
           .footer__socials-title {
             @extend %footer-col-title;
@@ -154,12 +154,24 @@ defineProps({
         @include media_sm {
           grid-template-columns: repeat(2, 1fr);
           grid-template-rows: repeat(2, 1fr);
-          gap: 40px;
+          gap: 2.5rem 1rem;
         }
 
         .footer__col {
           @include size(100%, auto);
-          @include flex(column, start, start, 12px);
+          @include flex(column, start, start, 0.75rem);
+
+          &:first-of-type {
+            @include media_sm {
+              order: 2;
+            }
+          }
+
+          &:last-of-type {
+            @include media_sm {
+              order: 3;
+            }
+          }
 
           &-title {
             @extend %footer-col-title;
@@ -168,7 +180,7 @@ defineProps({
           &-links {
             list-style-type: none;
             @include size(100%, auto);
-            @include flex(column, start, start, 12px);
+            @include flex(column, start, start, 0.75rem);
 
             .footer__link {
               text-decoration: none;
@@ -186,7 +198,7 @@ defineProps({
 
       .footer__input-group {
         @include size(100%, auto);
-        @include flex(column, start, start, 12px);
+        @include flex(column, start, start, 1rem);
 
         .footer__label {
           @extend %footer-col-title;
@@ -200,9 +212,9 @@ defineProps({
 
     .footer__copyright-box {
       @include size(100%, auto);
-      padding-block: 25px;
+      padding-block: 1.375rem;
       border-top: 1px solid $primary;
-      @include flex(row, space-between, center, 15px);
+      @include flex(row, space-between, center, 1rem);
 
       @include media_sm {
         justify-content: center;

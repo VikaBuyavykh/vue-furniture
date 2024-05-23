@@ -35,7 +35,7 @@ defineProps({
 
   &_listing {
     align-items: start;
-    gap: 21px;
+    gap: 1.25rem;
     @include size(100%, 100%);
     max-width: unset;
   }
@@ -44,10 +44,12 @@ defineProps({
     @extend %h2;
     color: white;
     text-align: center;
-    margin-bottom: 12px;
+    margin-bottom: 0.75rem;
 
     @include media_md {
       text-align: start;
+      font-size: 1.5rem;
+      line-height: 2.1rem;
     }
 
     &_listing {
@@ -65,6 +67,8 @@ defineProps({
 
     @include media_md {
       text-align: start;
+      font-size: 0.875rem;
+      line-height: 1.3125rem;
     }
 
     &_listing {
