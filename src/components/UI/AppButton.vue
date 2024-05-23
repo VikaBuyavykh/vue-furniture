@@ -16,6 +16,7 @@
   background-color: $light-grey;
   padding: 16px 32px;
   @extend %body-medium;
+  text-align: center;
   cursor: pointer;
   transition: all 0.2s ease;
 

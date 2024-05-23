@@ -17,6 +17,7 @@ import products from '@/utils/products'
           :name="item.name"
           :price="item.price"
           :horizontal="item.horizontal"
+          place="products"
         >
         </app-card>
       </ul>
@@ -36,6 +37,10 @@ import products from '@/utils/products'
   @include size(100%, auto);
   padding-block: 28px 40px;
 
+  @include media_md {
+    padding-block: 24px 28px;
+  }
+
   &__container {
     @extend %sizing;
     @include flex(column, start, center, 48px);
@@ -45,10 +50,19 @@ import products from '@/utils/products'
       @include size(100%, auto);
       display: grid;
       @extend %grid;
+
+      @include media_lg {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+      }
     }
 
     .products__btn {
       transition: all 0.2s ease;
+
+      @include media_xs {
+        width: 100%;
+      }
 
       &:hover {
         background-color: rgba($violet, 0.2);

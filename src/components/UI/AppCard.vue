@@ -6,13 +6,19 @@ defineProps({
   alt: String,
   name: String,
   price: Number,
-  horizontal: Boolean
+  horizontal: Boolean,
+  place: String
 })
 </script>
 
 <template>
   <li @click="() => router.push('/product')" class="card" :class="{ card_horizontal: horizontal }">
-    <img class="card__img" :src="img" :alt="alt" />
+    <img
+      class="card__img"
+      :class="{ card__img_place_products: place === 'products' }"
+      :src="img"
+      :alt="alt"
+    />
     <h4 class="card__name">{{ name }}</h4>
     <p class="card__price">£{{ price }}</p>
   </li>
@@ -50,6 +56,20 @@ defineProps({
     @include size(100%, 375px);
     @extend %pic;
     transition: all 0.15s ease;
+
+    &_place_products {
+      @include media_md {
+        height: 300px;
+      }
+
+      @include media_sm {
+        height: 250px;
+      }
+
+      @include media_xs {
+        height: 201px;
+      }
+    }
   }
 
   &__name {

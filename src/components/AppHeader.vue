@@ -1,17 +1,21 @@
 <script setup>
-import { ref } from 'vue'
+import { inject, ref } from 'vue'
 import navLinks from '@/utils/navLinks'
 import router from '@/router'
 
 defineProps({
   isAboutPage: Boolean,
-  isListingPage: Boolean
+  isListingPage: Boolean,
+  isMainPageSmallScreenSized: Boolean
 })
+
+const { setIsPopupVisible } = inject('app')
 
 const searchQuery = ref('')
 const isCartHovered = ref(false)
 const isProfileHovered = ref(false)
 const isLoupeHovered = ref(false)
+const isMenuHovered = ref(false)
 
 function search() {
   router.push('/collection')
@@ -31,6 +35,10 @@ function hoverProfile() {
 function hoverLoupe() {
   isLoupeHovered.value = !isLoupeHovered.value
 }
+
+function hoverMenu() {
+  isMenuHovered.value = !isMenuHovered.value
+}
 </script>
 
 <template>
@@ -39,7 +47,10 @@ function hoverLoupe() {
       class="header__row"
       :class="{ header__row_about: isAboutPage, header__row_listing: isListingPage }"
     >
-      <div class="header__input-box" v-if="!isAboutPage && !isListingPage">
+      <div
+        class="header__input-box"
+        v-if="!isAboutPage && !isListingPage && !isMainPageSmallScreenSized"
+      >
         <img
           @mouseenter="hoverLoupe"
           @mouseleave="hoverLoupe"
@@ -58,7 +69,7 @@ function hoverLoupe() {
       <h1
         @click="() => router.push('/')"
         class="header__name"
-        :class="{ header__name_about: isAboutPage }"
+        :class="{ header__name_about: isAboutPage || isMainPageSmallScreenSized }"
       >
         Avion
       </h1>
@@ -67,8 +78,14 @@ function hoverLoupe() {
           <router-link class="header__nav-list-link" :to="link.link">{{ link.name }}</router-link>
         </li>
       </ul>
-      <div class="header__buttons" :class="{ header__buttons_about: isAboutPage }">
-        <div class="header__input-box header__input-box_listing" v-if="isListingPage">
+      <div
+        class="header__buttons"
+        :class="{ header__buttons_about: isAboutPage || isMainPageSmallScreenSized }"
+      >
+        <div
+          class="header__input-box header__input-box_listing"
+          v-if="isListingPage || isMainPageSmallScreenSized"
+        >
           <img
             @mouseenter="hoverLoupe"
             @mouseleave="hoverLoupe"
@@ -103,6 +120,7 @@ function hoverLoupe() {
           />
         </button>
         <button
+          v-if="!isMainPageSmallScreenSized"
           @mouseenter="hoverCart"
           @mouseleave="hoverCart"
           class="header__btn"
@@ -115,16 +133,37 @@ function hoverLoupe() {
             alt="Cart icon"
           />
         </button>
-        <button @mouseenter="hoverProfile" @mouseleave="hoverProfile" class="header__btn">
+        <button
+          v-if="!isMainPageSmallScreenSized"
+          @mouseenter="hoverProfile"
+          @mouseleave="hoverProfile"
+          class="header__btn"
+        >
           <img
             class="header__btn-img"
             :src="isProfileHovered ? '/profile-active.svg' : '/profile.svg'"
             alt="Profile icon"
           />
         </button>
+        <button
+          @mouseenter="hoverMenu"
+          @mouseleave="hoverMenu"
+          class="header__btn header__btn_menu"
+          @click="() => setIsPopupVisible(true)"
+        >
+          <img
+            class="header__btn-img"
+            :src="isMenuHovered ? '/menu-active.svg' : '/menu.svg'"
+            alt="Menu icon"
+          />
+        </button>
       </div>
     </div>
-    <nav v-if="!isListingPage" class="header__nav" :class="{ header__nav_about: isAboutPage }">
+    <nav
+      v-if="!isListingPage && !isMainPageSmallScreenSized"
+      class="header__nav"
+      :class="{ header__nav_about: isAboutPage }"
+    >
       <ul class="header__nav-list">
         <li v-for="link in navLinks" :key="link.name" class="header__nav-list-item">
           <a class="header__nav-list-link" :href="link.link">{{ link.name }}</a>
@@ -151,6 +190,10 @@ function hoverLoupe() {
     align-items: center;
     padding-block: 20px;
     border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
+
+    @include media_lg {
+      border: none;
+    }
 
     &_about {
       border: none;
@@ -232,6 +275,14 @@ function hoverLoupe() {
         @extend %resetInputsAndBtns;
         @include size(1rem, 1rem);
         cursor: pointer;
+
+        &_menu {
+          display: none;
+
+          @include media_lg {
+            display: block;
+          }
+        }
       }
     }
   }

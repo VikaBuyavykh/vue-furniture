@@ -73,6 +73,10 @@ defineProps({
   @include flex(row, end, center, 1.5rem);
   list-style-type: none;
 
+  @include media_sm {
+    display: none;
+  }
+
   .footer__socials-item {
     @include size(1.5rem, 1.5rem);
     transition: all 0.2s ease;
@@ -98,6 +102,12 @@ defineProps({
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 1rem;
+
+      @include media_md {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding-block: 2.5rem 1rem;
+      }
 
       .footer__address-and-socials {
         @include size(100%, auto);
@@ -140,6 +150,12 @@ defineProps({
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 1rem;
+
+        @include media_sm {
+          grid-template-columns: repeat(2, 1fr);
+          grid-template-rows: repeat(2, 1fr);
+          gap: 40px;
+        }
 
         .footer__col {
           @include size(100%, auto);
@@ -187,6 +203,10 @@ defineProps({
       padding-block: 25px;
       border-top: 1px solid $primary;
       @include flex(row, space-between, center, 15px);
+
+      @include media_sm {
+        justify-content: center;
+      }
 
       .footer__copyright {
         @extend %footer-link;

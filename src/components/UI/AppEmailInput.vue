@@ -35,6 +35,7 @@ defineProps({
     background-color: #fff;
     padding: 1rem 2rem;
     @extend %body-medium;
+    overflow-x: scroll;
 
     &::placeholder {
       color: rgba($medium-blue, 0.2);

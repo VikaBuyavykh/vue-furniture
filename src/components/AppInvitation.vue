@@ -27,10 +27,20 @@ import benefits from '@/utils/benefits'
   background-image: url('@/images/invitation.jpg');
   @extend %bgi;
 
+  @include media_md {
+    padding-block: 1.5rem 2rem;
+  }
+
   .invitation__benefits {
     margin-block: 30px 40px;
     list-style-type: none;
     @include flex(row, center, center, 36px);
+
+    @include media_md {
+      flex-direction: column;
+      align-items: start;
+      gap: 0.5rem;
+    }
 
     .invitation__benefit {
       @include flex(row, start, center, 4px);

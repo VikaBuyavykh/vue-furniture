@@ -30,6 +30,10 @@ import router from '@/router'
   @include size(100%, auto);
   padding-block: 60px;
 
+  @include media_md {
+    padding-block: 2rem;
+  }
+
   &__container {
     @extend %sizing;
     display: grid;
@@ -37,11 +41,20 @@ import router from '@/router'
     grid-template-rows: 478px;
     gap: 1rem;
 
+    @include media_md {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(2, minmax(281px, max-content));
+    }
+
     .intro__card {
       background-color: $medium-blue;
       @include size(100%, auto);
       padding: 64px 75px 54px 64px;
       @include flex(column, start, start, 12px);
+
+      @include media_md {
+        padding: 2.25rem 2rem 1.875rem;
+      }
 
       .intro__title {
         @extend %intro-head;
@@ -56,6 +69,10 @@ import router from '@/router'
         background-color: rgba($light-grey, 0.15);
         color: white;
         transition: all 0.2s ease;
+
+        @include media_xs {
+          width: 100%;
+        }
 
         &:hover {
           background-color: rgba($light-grey, 0.35);

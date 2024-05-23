@@ -29,6 +29,10 @@ defineProps({
   max-width: 494px;
   @include flex(column, start, center, 0px);
 
+  @include media_md {
+    align-items: start;
+  }
+
   &_listing {
     align-items: start;
     gap: 21px;
@@ -42,6 +46,10 @@ defineProps({
     text-align: center;
     margin-bottom: 12px;
 
+    @include media_md {
+      text-align: start;
+    }
+
     &_listing {
       color: $medium-blue;
       text-align: left;
@@ -54,6 +62,10 @@ defineProps({
     @extend %body-large;
     color: white;
     text-align: center;
+
+    @include media_md {
+      text-align: start;
+    }
 
     &_listing {
       color: $medium-blue;
