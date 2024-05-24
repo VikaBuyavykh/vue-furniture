@@ -36,7 +36,7 @@ defineProps({
 
   .email-input {
     @extend %resetInputsAndBtns;
-    background-color: #fff;
+    background-color: $light-grey;
     padding: 1rem 2rem;
     @extend %body-medium;
     overflow-x: scroll;

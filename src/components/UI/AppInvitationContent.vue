@@ -25,8 +25,9 @@ defineProps({
 @import '@/assets/scss/mixinsAndExtensions.scss';
 
 .invitation-content {
-  @extend %sizing;
+  @include size(90%, auto);
   max-width: 494px;
+  margin-inline: auto;
   @include flex(column, start, center, 0px);
 
   @include media_md {
@@ -35,9 +36,19 @@ defineProps({
 
   &_listing {
     align-items: start;
-    gap: 1.25rem;
+    gap: 1.5rem;
     @include size(100%, 100%);
     max-width: unset;
+
+    @include media_md {
+      width: 80%;
+      margin-inline: auto;
+    }
+
+    @include media_sm {
+      width: 100%;
+      gap: 1rem;
+    }
   }
 
   .invitation-content__title {
@@ -53,17 +64,27 @@ defineProps({
     }
 
     &_listing {
+      @extend %intro-head;
+      text-align: start;
       color: $medium-blue;
-      text-align: left;
       margin-bottom: 0;
+
+      @include media_md {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+      }
     }
   }
 
   .invitation-content__desc {
-    @include size(95%, auto);
+    @include size(80%, auto);
     @extend %body-large;
     color: white;
     text-align: center;
+
+    @include media_xl {
+      width: 100%;
+    }
 
     @include media_md {
       text-align: start;
@@ -72,6 +93,7 @@ defineProps({
     }
 
     &_listing {
+      @extend %body-medium;
       color: $medium-blue;
       text-align: left;
     }
@@ -79,6 +101,11 @@ defineProps({
 
   .invitation-content__input {
     margin-top: auto;
+    width: 82%;
+
+    @include media_xl {
+      width: 100%;
+    }
   }
 }
 </style>

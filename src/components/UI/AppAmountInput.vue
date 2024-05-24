@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <div class="product__input-box">
+  <div class="amount-input-box">
     <button type="button">-</button>
     <input type="number" name="amout" id="amount" value="1" />
     <button type="button">+</button>
@@ -13,10 +13,15 @@
 @import '@/assets/scss/fonts.scss';
 @import '@/assets/scss/mixinsAndExtensions.scss';
 
-.product__input-box {
+.amount-input-box {
   @include flex(row, start, center, 25px);
   padding: 0.75rem 1rem;
   background-color: white;
+
+  @include media_xs {
+    width: 100%;
+    justify-content: space-between;
+  }
 
   input,
   button {
