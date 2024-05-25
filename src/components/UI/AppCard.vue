@@ -15,7 +15,10 @@ defineProps({
   <li @click="() => router.push('/product')" class="card" :class="{ card_horizontal: horizontal }">
     <img
       class="card__img"
-      :class="{ card__img_place_products: place === 'products' }"
+      :class="{
+        card__img_place_products: place === 'products',
+        card__img_place_listing: place === 'listing'
+      }"
       :src="img"
       :alt="alt"
     />
@@ -68,6 +71,13 @@ defineProps({
 
       @include media_xs {
         height: 201px;
+      }
+    }
+
+    &_place_listing {
+      @include media_xl {
+        height: 258px;
+        min-width: 200px;
       }
     }
   }

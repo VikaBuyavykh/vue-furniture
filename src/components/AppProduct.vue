@@ -60,10 +60,10 @@ import AppAmountInput from '@/components/UI/AppAmountInput.vue'
 .product {
   @include size(100%, auto);
   background-color: $light-grey;
-  padding-block: 3.125rem;
+  padding-block: 3.5rem 3rem;
 
   @include media_sm {
-    padding-block: 0 1.875rem;
+    padding-block: 0 2rem;
   }
 
   &__container {
@@ -77,7 +77,7 @@ import AppAmountInput from '@/components/UI/AppAmountInput.vue'
     }
 
     @include media_md {
-      gap: 1.75rem;
+      gap: 2rem;
     }
 
     @include media_sm {
@@ -93,7 +93,7 @@ import AppAmountInput from '@/components/UI/AppAmountInput.vue'
       }
 
       @include media_md {
-        height: 380px;
+        height: 386px;
       }
     }
 
@@ -158,6 +158,11 @@ import AppAmountInput from '@/components/UI/AppAmountInput.vue'
           @extend %ordinary;
           color: $medium-blue;
           text-align: left;
+          width: 83%;
+
+          @include media_xl {
+            width: 100%;
+          }
 
           @include media_sm {
             font-size: 0.875rem;
@@ -228,7 +233,7 @@ import AppAmountInput from '@/components/UI/AppAmountInput.vue'
         margin-block: 2.5rem 3rem;
 
         @include media_md {
-          margin-block: 1.75rem 2rem;
+          margin-block: 1.75rem 2.25rem;
           gap: 0.5rem;
         }
 
@@ -254,7 +259,7 @@ import AppAmountInput from '@/components/UI/AppAmountInput.vue'
 
         @include media_xs {
           width: 100%;
-          flex-direction: column;
+          flex-direction: column-reverse;
           align-items: stretch;
         }
 

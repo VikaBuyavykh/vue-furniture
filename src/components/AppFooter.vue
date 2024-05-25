@@ -11,8 +11,12 @@ defineProps({
 <template>
   <footer class="footer">
     <div class="footer__content">
-      <div class="footer__links-box">
-        <div v-if="isListingPage" class="footer__address-and-socials">
+      <div class="footer__links-box" :class="{ 'footer__links-box_listing': isListingPage }">
+        <div
+          v-if="isListingPage"
+          class="footer__address-and-socials"
+          :class="{ 'footer__address-and-socials_listing': isListingPage }"
+        >
           <div class="footer__address-group">
             <h2 class="footer__logo">Avion</h2>
             <address class="footer__address">
@@ -26,7 +30,7 @@ defineProps({
           </div>
           <div class="footer__socials-group">
             <h3 class="footer__socials-title">Social links</h3>
-            <ul class="footer__socials">
+            <ul class="footer__socials" :class="{ footer__socials_listing: isListingPage }">
               <li v-for="item in socials" :key="item.img" class="footer__socials-item">
                 <a :href="item.link">
                   <img :src="item.img" :alt="item.alt" />
@@ -36,7 +40,12 @@ defineProps({
           </div>
         </div>
         <ul class="footer__cols">
-          <li v-for="section in sections" :key="section.section" class="footer__col">
+          <li
+            v-for="section in sections"
+            :key="section.section"
+            class="footer__col"
+            :class="{ footer__col_listing: isListingPage }"
+          >
             <h5 class="footer__col-title">{{ section.section }}</h5>
             <ul class="footer__col-links">
               <li class="footer__links-item" v-for="item in section.list" :key="item.name">
@@ -50,7 +59,10 @@ defineProps({
           <app-email-input theme="dark" class="footer__input"></app-email-input>
         </div>
       </div>
-      <div class="footer__copyright-box">
+      <div
+        class="footer__copyright-box"
+        :class="{ 'footer__copyright-box_listing': isListingPage }"
+      >
         <p class="footer__copyright">Copyright 2022 Avion LTD</p>
         <ul v-if="!isListingPage" class="footer__socials">
           <li v-for="item in socials" :key="item.img" class="footer__socials-item">
@@ -77,6 +89,14 @@ defineProps({
     display: none;
   }
 
+  &_listing {
+    @include media_sm {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+  }
+
   .footer__socials-item {
     @include size(1.5rem, 1.5rem);
     transition: all 0.2s ease;
@@ -97,7 +117,7 @@ defineProps({
     @include flex(column, start, stretch, 0px);
 
     .footer__links-box {
-      padding-block: 58px 48px;
+      padding-block: 3.625rem 3rem;
       @include size(100%, auto);
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -105,8 +125,18 @@ defineProps({
 
       @include media_md {
         grid-template-columns: 1fr;
-        gap: 0.5rem;
+        gap: 2.5rem;
         padding-block: 2.5rem 1rem;
+      }
+
+      &_listing {
+        padding-block: 3.5rem 2rem;
+
+        @include media_xl {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+          padding-block: 2.5rem;
+        }
       }
 
       .footer__address-and-socials {
@@ -114,6 +144,17 @@ defineProps({
         display: grid;
         grid-template-columns: max-content auto;
         gap: 65px;
+
+        &_listing {
+          @include media_xl {
+            align-items: baseline;
+          }
+
+          @include media_md {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+          }
+        }
 
         .footer__address-group {
           @include size(100%, auto);
@@ -124,19 +165,21 @@ defineProps({
           }
 
           .footer__address {
-            @extend %footer-link;
-            font-style: normal;
-
             ul {
               list-style-type: none;
               @include flex(column, start, start, 0.75rem);
+
+              li {
+                @extend %footer-link;
+                font-style: normal;
+              }
             }
           }
         }
 
         .footer__socials-group {
           @include size(100%, auto);
-          @include flex(column, start, start, 1.375rem);
+          @include flex(column, start, start, 1.5rem);
 
           .footer__socials-title {
             @extend %footer-col-title;
@@ -153,7 +196,7 @@ defineProps({
 
         @include media_sm {
           grid-template-columns: repeat(2, 1fr);
-          grid-template-rows: repeat(2, 1fr);
+          grid-template-rows: repeat(auto-fit, 1fr);
           gap: 2.5rem 1rem;
         }
 
@@ -170,6 +213,17 @@ defineProps({
           &:last-of-type {
             @include media_sm {
               order: 3;
+            }
+          }
+
+          &_listing {
+            @include media_sm {
+              &:nth-of-type(2) {
+                display: none;
+              }
+              &:last-of-type {
+                order: 1;
+              }
             }
           }
 
@@ -212,9 +266,17 @@ defineProps({
 
     .footer__copyright-box {
       @include size(100%, auto);
-      padding-block: 1.375rem;
+      padding-block: 1rem 1.25rem;
       border-top: 1px solid $primary;
       @include flex(row, space-between, center, 1rem);
+
+      &_listing {
+        padding-block: 1rem;
+
+        @include media_md {
+          padding-block: 1.25rem;
+        }
+      }
 
       @include media_sm {
         justify-content: center;

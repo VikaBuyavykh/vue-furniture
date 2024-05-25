@@ -18,6 +18,7 @@ import router from '@/router'
           :name="item.name"
           :price="item.price"
           :horizontal="item.horizontal"
+          place="listing"
         ></app-card>
       </ul>
       <app-button @click="() => router.push('/collection')" class="recommendation__btn"
@@ -34,27 +35,59 @@ import router from '@/router'
 
 .recommendation {
   @include size(100%, auto);
-  padding-block: 64px 48px;
+  padding-block: 4rem 3rem;
+
+  @include media_md {
+    padding-block: 3rem 2.375rem;
+  }
 
   &__container {
     @extend %sizing;
     @include flex(column, start, stretch, 0px);
 
+    @include media_md {
+      width: 100%;
+    }
+
     .recommendation_title {
       @extend %h2;
       color: $medium-blue;
+
+      @include media_md {
+        font-size: 1.25rem;
+        line-height: 1.5375rem;
+        width: 90%;
+        margin-inline: auto;
+      }
+
+      @include media_xs {
+        width: 88%;
+      }
     }
 
     .recommendation_list {
       list-style-type: none;
       @include size(100%, auto);
       @extend %grid;
-      margin-block: 25px 44px;
+      grid-template-columns: repeat(4, minmax(200px, 1fr));
+      overflow-x: scroll;
+      margin-block: 1.5rem 2.75rem;
+
+      @include media_md {
+        margin-block: 2.25rem 2rem;
+        padding-inline: 1.5rem;
+      }
     }
 
     .recommendation__btn {
       align-self: center;
       transition: all 0.2s ease;
+
+      @include media_xs {
+        width: 88%;
+        margin-inline: auto;
+        align-self: stretch;
+      }
 
       &:hover {
         background-color: rgba($violet, 0.2);

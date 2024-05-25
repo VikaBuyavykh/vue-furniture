@@ -77,7 +77,7 @@ defineProps({
       @include media_sm {
         grid-template-columns: 1fr;
         grid-template-rows: repeat(4, 1fr);
-        gap: 1.625rem;
+        gap: 1.875rem;
       }
 
       &-item {

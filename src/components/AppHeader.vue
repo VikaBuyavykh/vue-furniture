@@ -73,7 +73,11 @@ function hoverMenu() {
       >
         Avion
       </h1>
-      <ul v-if="isListingPage" class="header__nav-list">
+      <ul
+        v-if="isListingPage"
+        class="header__nav-list"
+        :class="{ 'header__nav-list_listing': isListingPage }"
+      >
         <li v-for="link in navLinks" :key="link.name" class="header__nav-list-item">
           <router-link class="header__nav-list-link" :to="link.link">{{ link.name }}</router-link>
         </li>
@@ -201,9 +205,15 @@ function hoverMenu() {
     }
 
     &_listing {
+      width: 89%;
       grid-template-columns: repeat(3, minmax(min-content, max-content));
       justify-content: space-between;
       border: none;
+
+      @include media_lg {
+        width: 87.5%;
+        grid-template-columns: repeat(2, minmax(min-content, max-content));
+      }
     }
 
     .header__input-box {
@@ -306,7 +316,19 @@ function hoverMenu() {
     &-list {
       list-style-type: none;
       margin: 0 auto;
-      @include flex(row, center, center, 44px);
+      @include flex(row, center, center, 2.75rem);
+
+      &_listing {
+        margin-left: 2.75rem;
+
+        @include media_xl {
+          gap: 1rem;
+        }
+
+        @include media_lg {
+          display: none;
+        }
+      }
 
       &-item {
         .header__nav-list-link {

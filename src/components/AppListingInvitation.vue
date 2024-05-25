@@ -21,7 +21,7 @@ import AppInvitationContent from '@/components/UI/AppInvitationContent.vue'
 @import '@/assets/scss/mixinsAndExtensions.scss';
 
 .listing-invitation {
-  max-width: 1386px;
+  max-width: $xxl-screen-size;
   @include size(100%, auto);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -40,12 +40,12 @@ import AppInvitationContent from '@/components/UI/AppInvitationContent.vue'
     }
 
     @include media_sm {
-      height: 358px;
+      height: 364px;
     }
   }
 
   &__container {
-    padding: 70px 72px 66px;
+    padding: 4.375rem 4.5rem;
     @include size(100%, auto);
 
     @include media_lg {
