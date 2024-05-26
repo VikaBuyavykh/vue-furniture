@@ -5,7 +5,8 @@ import socials from '@/utils/socials'
 
 defineProps({
   isListingPage: Boolean,
-  isAboutPage: Boolean
+  isAboutPage: Boolean,
+  isBasketPage: Boolean
 })
 </script>
 
@@ -64,7 +65,8 @@ defineProps({
         class="footer__copyright-box"
         :class="{
           'footer__copyright-box_listing': isListingPage,
-          'footer__copyright-box_about': isAboutPage
+          'footer__copyright-box_about': isAboutPage,
+          'footer__copyright-box_basket': isBasketPage
         }"
       >
         <p class="footer__copyright">Copyright 2022 Avion LTD</p>
@@ -121,7 +123,7 @@ defineProps({
     @include flex(column, start, stretch, 0px);
 
     .footer__links-box {
-      padding-block: 3.625rem 3rem;
+      padding-block: 3.75rem 3rem;
       @include size(100%, auto);
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -288,6 +290,10 @@ defineProps({
         @include media_md {
           padding-top: 1.25rem;
         }
+      }
+
+      &_basket {
+        padding-block: 1.5rem;
       }
 
       @include media_sm {

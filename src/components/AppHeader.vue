@@ -7,7 +7,8 @@ defineProps({
   isAboutPage: Boolean,
   isListingPage: Boolean,
   isMainPageSmallScreenSized: Boolean,
-  isAboutPageSmallScreenSized: Boolean
+  isAboutPageSmallScreenSized: Boolean,
+  isBasketPageSmallScreenSized: Boolean
 })
 
 const { setIsPopupVisible } = inject('app')
@@ -50,7 +51,12 @@ function hoverMenu() {
     >
       <div
         class="header__input-box"
-        v-if="!isAboutPage && !isListingPage && !isMainPageSmallScreenSized"
+        v-if="
+          !isAboutPage &&
+          !isListingPage &&
+          !isMainPageSmallScreenSized &&
+          !isBasketPageSmallScreenSized
+        "
       >
         <img
           @mouseenter="hoverLoupe"
@@ -70,7 +76,10 @@ function hoverMenu() {
       <h1
         @click="() => router.push('/')"
         class="header__name"
-        :class="{ header__name_about: isAboutPage || isMainPageSmallScreenSized }"
+        :class="{
+          header__name_about:
+            isAboutPage || isMainPageSmallScreenSized || isBasketPageSmallScreenSized
+        }"
       >
         Avion
       </h1>
@@ -85,11 +94,15 @@ function hoverMenu() {
       </ul>
       <div
         class="header__buttons"
-        :class="{ header__buttons_about: isAboutPage || isMainPageSmallScreenSized }"
+        :class="{
+          header__buttons_about:
+            isAboutPage || isMainPageSmallScreenSized || isBasketPageSmallScreenSized,
+          header__buttons_basket: isBasketPageSmallScreenSized
+        }"
       >
         <div
           class="header__input-box header__input-box_listing"
-          v-if="isListingPage || isMainPageSmallScreenSized"
+          v-if="isListingPage || isMainPageSmallScreenSized || isBasketPageSmallScreenSized"
         >
           <img
             @mouseenter="hoverLoupe"
@@ -115,7 +128,7 @@ function hoverMenu() {
           @mouseenter="hoverLoupe"
           @mouseleave="hoverLoupe"
           @click="search"
-          v-if="isAboutPage && !isAboutPageSmallScreenSized"
+          v-if="isAboutPage && !isAboutPageSmallScreenSized && !isBasketPageSmallScreenSized"
           class="header__btn"
         >
           <img
@@ -125,7 +138,11 @@ function hoverMenu() {
           />
         </button>
         <button
-          v-if="!isMainPageSmallScreenSized && !isAboutPageSmallScreenSized"
+          v-if="
+            !isMainPageSmallScreenSized &&
+            !isAboutPageSmallScreenSized &&
+            !isBasketPageSmallScreenSized
+          "
           @mouseenter="hoverCart"
           @mouseleave="hoverCart"
           class="header__btn"
@@ -139,7 +156,11 @@ function hoverMenu() {
           />
         </button>
         <button
-          v-if="!isMainPageSmallScreenSized && !isAboutPageSmallScreenSized"
+          v-if="
+            !isMainPageSmallScreenSized &&
+            !isAboutPageSmallScreenSized &&
+            !isBasketPageSmallScreenSized
+          "
           @mouseenter="hoverProfile"
           @mouseleave="hoverProfile"
           class="header__btn"
@@ -165,7 +186,7 @@ function hoverMenu() {
       </div>
     </div>
     <nav
-      v-if="!isListingPage && !isMainPageSmallScreenSized"
+      v-if="!isListingPage && !isMainPageSmallScreenSized && !isBasketPageSmallScreenSized"
       class="header__nav"
       :class="{ header__nav_about: isAboutPage }"
     >
@@ -276,6 +297,12 @@ function hoverMenu() {
 
         @include media_lg {
           margin-right: 0.25rem;
+        }
+      }
+
+      &_basket {
+        @include media_lg {
+          margin-right: 0;
         }
       }
 

@@ -1,7 +1,11 @@
-<script setup></script>
+<script setup>
+defineProps({
+  place: String
+})
+</script>
 
 <template>
-  <div class="amount-input-box">
+  <div class="amount-input-box" :class="{ 'amount-input-box_basket': place === 'basket' }">
     <button type="button">-</button>
     <input type="number" name="amout" id="amount" value="1" />
     <button type="button">+</button>
@@ -14,13 +18,17 @@
 @import '@/assets/scss/mixinsAndExtensions.scss';
 
 .amount-input-box {
-  @include flex(row, start, center, 25px);
+  @include flex(row, start, center, 1.5rem);
   padding: 0.75rem 1rem;
   background-color: white;
 
   @include media_xs {
     width: 100%;
     justify-content: space-between;
+
+    &_basket {
+      justify-content: start;
+    }
   }
 
   input,

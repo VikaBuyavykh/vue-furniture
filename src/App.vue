@@ -6,8 +6,10 @@ import AppPopup from '@/components/AppPopup.vue'
 
 const isMainPageSmallScreenSized = ref(false)
 const isAboutPageSmallScreenSized = ref(false)
+const isBasketPageSmallScreenSized = ref(false)
 const isAboutPage = ref(false)
 const isListingPage = ref(false)
+const isBasketPage = ref(false)
 const isPopupVisible = ref(false)
 
 function setIsMainPageSmallScreenSized(value) {
@@ -18,8 +20,16 @@ function setIsAboutPageSmallScreenSized(value) {
   isAboutPageSmallScreenSized.value = value
 }
 
+function setIsBasketPageSmallScreenSized(value) {
+  isBasketPageSmallScreenSized.value = value
+}
+
 function setIsAboutPage(value) {
   isAboutPage.value = value
+}
+
+function setIsBasketPage(value) {
+  isBasketPage.value = value
 }
 
 function setIsListingPage(value) {
@@ -35,7 +45,9 @@ provide('app', {
   setIsListingPage,
   setIsPopupVisible,
   setIsMainPageSmallScreenSized,
-  setIsAboutPageSmallScreenSized
+  setIsAboutPageSmallScreenSized,
+  setIsBasketPage,
+  setIsBasketPageSmallScreenSized
 })
 </script>
 
@@ -46,9 +58,14 @@ provide('app', {
       :isListingPage="isListingPage"
       :isMainPageSmallScreenSized="isMainPageSmallScreenSized"
       :isAboutPageSmallScreenSized="isAboutPageSmallScreenSized"
+      :isBasketPageSmallScreenSized="isBasketPageSmallScreenSized"
     ></app-header>
     <router-view></router-view>
-    <app-footer :isListingPage="isListingPage" :isAboutPage="isAboutPage"></app-footer>
+    <app-footer
+      :isListingPage="isListingPage"
+      :isAboutPage="isAboutPage"
+      :isBasketPage="isBasketPage"
+    ></app-footer>
     <Transition name="fade">
       <app-popup v-if="isPopupVisible" :isAboutPage="isAboutPage"></app-popup>
     </Transition>
