@@ -6,7 +6,8 @@ import router from '@/router'
 defineProps({
   isAboutPage: Boolean,
   isListingPage: Boolean,
-  isMainPageSmallScreenSized: Boolean
+  isMainPageSmallScreenSized: Boolean,
+  isAboutPageSmallScreenSized: Boolean
 })
 
 const { setIsPopupVisible } = inject('app')
@@ -114,7 +115,7 @@ function hoverMenu() {
           @mouseenter="hoverLoupe"
           @mouseleave="hoverLoupe"
           @click="search"
-          v-if="isAboutPage"
+          v-if="isAboutPage && !isAboutPageSmallScreenSized"
           class="header__btn"
         >
           <img
@@ -124,7 +125,7 @@ function hoverMenu() {
           />
         </button>
         <button
-          v-if="!isMainPageSmallScreenSized"
+          v-if="!isMainPageSmallScreenSized && !isAboutPageSmallScreenSized"
           @mouseenter="hoverCart"
           @mouseleave="hoverCart"
           class="header__btn"
@@ -138,7 +139,7 @@ function hoverMenu() {
           />
         </button>
         <button
-          v-if="!isMainPageSmallScreenSized"
+          v-if="!isMainPageSmallScreenSized && !isAboutPageSmallScreenSized"
           @mouseenter="hoverProfile"
           @mouseleave="hoverProfile"
           class="header__btn"
@@ -169,8 +170,11 @@ function hoverMenu() {
       :class="{ header__nav_about: isAboutPage }"
     >
       <ul class="header__nav-list">
+        <li v-if="isAboutPage" key="All products" class="header__nav-list-item">
+          <router-link class="header__nav-list-link" to="/collection">All products</router-link>
+        </li>
         <li v-for="link in navLinks" :key="link.name" class="header__nav-list-item">
-          <a class="header__nav-list-link" :href="link.link">{{ link.name }}</a>
+          <router-link class="header__nav-list-link" :to="link.link">{{ link.name }}</router-link>
         </li>
       </ul>
     </nav>
@@ -268,11 +272,20 @@ function hoverMenu() {
 
       &_about {
         grid-area: 1 / 2 / 2 / 4;
+        margin-right: 1.25rem;
+
+        @include media_lg {
+          margin-right: 0.25rem;
+        }
       }
 
       .header__sections-menu {
         @include flex(row, end, center, 32px);
         margin-right: 2rem;
+
+        @include media_lg {
+          display: none;
+        }
 
         .header__menu-item {
           @extend %ordinary;
@@ -305,18 +318,22 @@ function hoverMenu() {
   &__nav {
     @include size(96.25%, auto);
     max-width: 1386px;
-    padding-block: 20px;
+    padding-block: 1.25rem;
+    overflow-x: scroll;
 
     &_about {
       @include size(100%, auto);
       max-width: unset;
       background-color: $light-grey;
+      padding-block: 1rem;
     }
 
     &-list {
       list-style-type: none;
       margin: 0 auto;
       @include flex(row, center, center, 2.75rem);
+      padding-inline: 1.5rem;
+      width: max-content;
 
       &_listing {
         margin-left: 2.75rem;
@@ -335,6 +352,7 @@ function hoverMenu() {
           text-decoration: none;
           @extend %ordinary;
           transition: all 0.2s ease;
+          text-wrap: nowrap;
 
           &:hover {
             text-decoration: underline;

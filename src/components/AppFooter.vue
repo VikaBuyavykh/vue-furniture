@@ -4,7 +4,8 @@ import sections from '@/utils/sections'
 import socials from '@/utils/socials'
 
 defineProps({
-  isListingPage: Boolean
+  isListingPage: Boolean,
+  isAboutPage: Boolean
 })
 </script>
 
@@ -61,7 +62,10 @@ defineProps({
       </div>
       <div
         class="footer__copyright-box"
-        :class="{ 'footer__copyright-box_listing': isListingPage }"
+        :class="{
+          'footer__copyright-box_listing': isListingPage,
+          'footer__copyright-box_about': isAboutPage
+        }"
       >
         <p class="footer__copyright">Copyright 2022 Avion LTD</p>
         <ul v-if="!isListingPage" class="footer__socials">
@@ -126,7 +130,7 @@ defineProps({
       @include media_md {
         grid-template-columns: 1fr;
         gap: 2.5rem;
-        padding-block: 2.5rem 1rem;
+        padding-block: 2.5rem 0.875rem;
       }
 
       &_listing {
@@ -197,7 +201,7 @@ defineProps({
         @include media_sm {
           grid-template-columns: repeat(2, 1fr);
           grid-template-rows: repeat(auto-fit, 1fr);
-          gap: 2.5rem 1rem;
+          gap: 2.75rem 1rem;
         }
 
         .footer__col {
@@ -275,6 +279,14 @@ defineProps({
 
         @include media_md {
           padding-block: 1.25rem;
+        }
+      }
+
+      &_about {
+        padding-top: 1.5rem;
+
+        @include media_md {
+          padding-top: 1.25rem;
         }
       }
 

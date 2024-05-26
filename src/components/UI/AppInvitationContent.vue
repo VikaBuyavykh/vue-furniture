@@ -25,7 +25,7 @@ defineProps({
 @import '@/assets/scss/mixinsAndExtensions.scss';
 
 .invitation-content {
-  @include size(90%, auto);
+  @include size(88%, auto);
   max-width: 494px;
   margin-inline: auto;
   @include flex(column, start, center, 0px);
@@ -77,7 +77,7 @@ defineProps({
   }
 
   .invitation-content__desc {
-    @include size(80%, auto);
+    @include size(95%, auto);
     @extend %body-large;
     color: white;
     text-align: center;

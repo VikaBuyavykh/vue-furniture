@@ -20,7 +20,9 @@ function getInTouch() {
           homeware is what we live, breathe and design so our Chelsea boutique become the hotbed for
           the London interior design community.
         </p>
-        <app-button @click="getInTouch" class="history__btn">Get in touch</app-button>
+        <app-button @click="getInTouch" class="history__btn history__btn_first"
+          >Get in touch</app-button
+        >
       </li>
       <li class="history__img-box">
         <img
@@ -46,7 +48,9 @@ function getInTouch() {
           homeware is what we live, breathe and design so our Chelsea boutique become the hotbed for
           the London interior design community.
         </p>
-        <app-button @click="getInTouch" class="history__btn">Get in touch</app-button>
+        <app-button @click="getInTouch" class="history__btn history__btn_second"
+          >Get in touch</app-button
+        >
       </li>
     </ul>
   </section>
@@ -63,29 +67,67 @@ function getInTouch() {
   &__container {
     list-style-type: none;
     @include size(100%, auto);
-    max-width: 1440px;
+    max-width: $xxl-screen-size;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 603px);
+    grid-template-rows: repeat(2, 604px);
+
+    @include media_md {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(4, max-content);
+    }
 
     .history__text-box {
-      padding: 72px 100px 54px 84px;
-      @include flex(column, start, start, 25px);
+      padding: 4.5rem 6.5rem 3.375rem 5.25rem;
+      @include flex(column, start, start, 1.5rem);
+
+      @include media_xl {
+        padding: 3rem 1.5rem 2.375rem;
+      }
+
+      @include media_md {
+        gap: 0.75rem;
+      }
 
       .history__title {
         @extend %h3;
+
+        @include media_md {
+          font-size: 1.25rem;
+          line-height: 1.75rem;
+          width: 80%;
+        }
       }
 
       .history__paragraph {
         @extend %ordinary;
         color: $grey-violet;
         text-align: left;
+
+        @include media_md {
+          font-size: 0.875rem;
+          line-height: 1.3125rem;
+        }
       }
 
       .history__btn {
         margin-top: auto;
         transition: all 0.2s ease;
+
+        @include media_md {
+          &_first {
+            margin-top: 3.25rem;
+          }
+
+          &_second {
+            margin-block: 2.25rem 0.75rem;
+          }
+        }
+
+        @include media_xs {
+          align-self: stretch;
+        }
 
         &:hover {
           background-color: rgba($violet, 0.2);
@@ -95,6 +137,10 @@ function getInTouch() {
 
     .history__img-box {
       @include size(100%, 100%);
+
+      @include media_md {
+        height: 358px;
+      }
 
       .history__img {
         @include size(100%, 100%);

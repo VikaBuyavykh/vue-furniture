@@ -3,7 +3,7 @@ import { inject, ref } from 'vue'
 import navLinks from '@/utils/navLinks'
 
 defineProps({
-  isMainPageSmallScreenSized: Boolean
+  isAboutPage: Boolean
 })
 
 const { setIsPopupVisible } = inject('app')
@@ -26,7 +26,7 @@ function hoverClose() {
         alt="Close icon"
         class="popup__close"
       />
-      <nav class="popup__menu">
+      <nav v-if="!isAboutPage" class="popup__menu">
         <router-link
           @click="() => setIsPopupVisible(false)"
           class="popup__link"
@@ -41,6 +41,23 @@ function hoverClose() {
         >
         <router-link @click="() => setIsPopupVisible(false)" class="popup__link" to="/basket"
           >Cart</router-link
+        >
+      </nav>
+      <nav v-else class="popup__menu">
+        <router-link @click="() => setIsPopupVisible(false)" class="popup__link" to="#"
+          >Profile</router-link
+        >
+        <router-link @click="() => setIsPopupVisible(false)" class="popup__link" to="/basket"
+          >Cart</router-link
+        >
+        <router-link @click="() => setIsPopupVisible(false)" class="popup__link" to="/about"
+          >About us</router-link
+        >
+        <router-link @click="() => setIsPopupVisible(false)" class="popup__link" to="#"
+          >Contact</router-link
+        >
+        <router-link @click="() => setIsPopupVisible(false)" class="popup__link" to="#"
+          >Blog</router-link
         >
       </nav>
     </div>
