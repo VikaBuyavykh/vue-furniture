@@ -17,7 +17,8 @@ defineProps({
       class="card__img"
       :class="{
         card__img_place_products: place === 'products',
-        card__img_place_listing: place === 'listing'
+        card__img_place_listing: place === 'listing',
+        card__img_place_collection: place === 'collection'
       }"
       :src="img"
       :alt="alt"
@@ -78,6 +79,16 @@ defineProps({
       @include media_xl {
         height: 258px;
         min-width: 200px;
+      }
+    }
+
+    &_place_collection {
+      @include media_md {
+        height: 250px;
+      }
+
+      @include media_sm {
+        height: 201px;
       }
     }
   }

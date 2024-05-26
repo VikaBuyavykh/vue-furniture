@@ -7,9 +7,11 @@ import AppPopup from '@/components/AppPopup.vue'
 const isMainPageSmallScreenSized = ref(false)
 const isAboutPageSmallScreenSized = ref(false)
 const isBasketPageSmallScreenSized = ref(false)
+const isCollectionPageSmallScreenSized = ref(false)
 const isAboutPage = ref(false)
 const isListingPage = ref(false)
 const isBasketPage = ref(false)
+const isCollectionPage = ref(false)
 const isPopupVisible = ref(false)
 
 function setIsMainPageSmallScreenSized(value) {
@@ -24,8 +26,16 @@ function setIsBasketPageSmallScreenSized(value) {
   isBasketPageSmallScreenSized.value = value
 }
 
+function setIsCollectionPageSmallScreenSized(value) {
+  isCollectionPageSmallScreenSized.value = value
+}
+
 function setIsAboutPage(value) {
   isAboutPage.value = value
+}
+
+function setIsCollectionPage(value) {
+  isCollectionPage.value = value
 }
 
 function setIsBasketPage(value) {
@@ -47,7 +57,9 @@ provide('app', {
   setIsMainPageSmallScreenSized,
   setIsAboutPageSmallScreenSized,
   setIsBasketPage,
-  setIsBasketPageSmallScreenSized
+  setIsBasketPageSmallScreenSized,
+  setIsCollectionPageSmallScreenSized,
+  setIsCollectionPage
 })
 </script>
 
@@ -59,12 +71,14 @@ provide('app', {
       :isMainPageSmallScreenSized="isMainPageSmallScreenSized"
       :isAboutPageSmallScreenSized="isAboutPageSmallScreenSized"
       :isBasketPageSmallScreenSized="isBasketPageSmallScreenSized"
+      :isCollectionPageSmallScreenSized="isCollectionPageSmallScreenSized"
     ></app-header>
     <router-view></router-view>
     <app-footer
       :isListingPage="isListingPage"
       :isAboutPage="isAboutPage"
       :isBasketPage="isBasketPage"
+      :isCollectionPage="isCollectionPage"
     ></app-footer>
     <Transition name="fade">
       <app-popup v-if="isPopupVisible" :isAboutPage="isAboutPage"></app-popup>

@@ -6,7 +6,8 @@ import socials from '@/utils/socials'
 defineProps({
   isListingPage: Boolean,
   isAboutPage: Boolean,
-  isBasketPage: Boolean
+  isBasketPage: Boolean,
+  isCollectionPage: Boolean
 })
 </script>
 
@@ -66,7 +67,8 @@ defineProps({
         :class="{
           'footer__copyright-box_listing': isListingPage,
           'footer__copyright-box_about': isAboutPage,
-          'footer__copyright-box_basket': isBasketPage
+          'footer__copyright-box_basket': isBasketPage,
+          'footer__copyright-box_collection': isCollectionPage
         }"
       >
         <p class="footer__copyright">Copyright 2022 Avion LTD</p>
@@ -294,6 +296,14 @@ defineProps({
 
       &_basket {
         padding-block: 1.5rem;
+      }
+
+      &_collection {
+        padding-block: 1.5rem;
+
+        @include media_md {
+          padding-block: 1.25rem;
+        }
       }
 
       @include media_sm {

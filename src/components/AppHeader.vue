@@ -8,7 +8,8 @@ defineProps({
   isListingPage: Boolean,
   isMainPageSmallScreenSized: Boolean,
   isAboutPageSmallScreenSized: Boolean,
-  isBasketPageSmallScreenSized: Boolean
+  isBasketPageSmallScreenSized: Boolean,
+  isCollectionPageSmallScreenSized: Boolean
 })
 
 const { setIsPopupVisible } = inject('app')
@@ -55,7 +56,8 @@ function hoverMenu() {
           !isAboutPage &&
           !isListingPage &&
           !isMainPageSmallScreenSized &&
-          !isBasketPageSmallScreenSized
+          !isBasketPageSmallScreenSized &&
+          !isCollectionPageSmallScreenSized
         "
       >
         <img
@@ -78,7 +80,10 @@ function hoverMenu() {
         class="header__name"
         :class="{
           header__name_about:
-            isAboutPage || isMainPageSmallScreenSized || isBasketPageSmallScreenSized
+            isAboutPage ||
+            isMainPageSmallScreenSized ||
+            isBasketPageSmallScreenSized ||
+            isCollectionPageSmallScreenSized
         }"
       >
         Avion
@@ -96,13 +101,21 @@ function hoverMenu() {
         class="header__buttons"
         :class="{
           header__buttons_about:
-            isAboutPage || isMainPageSmallScreenSized || isBasketPageSmallScreenSized,
-          header__buttons_basket: isBasketPageSmallScreenSized
+            isAboutPage ||
+            isMainPageSmallScreenSized ||
+            isBasketPageSmallScreenSized ||
+            isCollectionPageSmallScreenSized,
+          header__buttons_basket: isBasketPageSmallScreenSized || isCollectionPageSmallScreenSized
         }"
       >
         <div
           class="header__input-box header__input-box_listing"
-          v-if="isListingPage || isMainPageSmallScreenSized || isBasketPageSmallScreenSized"
+          v-if="
+            isListingPage ||
+            isMainPageSmallScreenSized ||
+            isBasketPageSmallScreenSized ||
+            isCollectionPageSmallScreenSized
+          "
         >
           <img
             @mouseenter="hoverLoupe"
@@ -128,7 +141,12 @@ function hoverMenu() {
           @mouseenter="hoverLoupe"
           @mouseleave="hoverLoupe"
           @click="search"
-          v-if="isAboutPage && !isAboutPageSmallScreenSized && !isBasketPageSmallScreenSized"
+          v-if="
+            isAboutPage &&
+            !isAboutPageSmallScreenSized &&
+            !isBasketPageSmallScreenSized &&
+            !isCollectionPageSmallScreenSized
+          "
           class="header__btn"
         >
           <img
@@ -141,7 +159,8 @@ function hoverMenu() {
           v-if="
             !isMainPageSmallScreenSized &&
             !isAboutPageSmallScreenSized &&
-            !isBasketPageSmallScreenSized
+            !isBasketPageSmallScreenSized &&
+            !isCollectionPageSmallScreenSized
           "
           @mouseenter="hoverCart"
           @mouseleave="hoverCart"
@@ -159,7 +178,8 @@ function hoverMenu() {
           v-if="
             !isMainPageSmallScreenSized &&
             !isAboutPageSmallScreenSized &&
-            !isBasketPageSmallScreenSized
+            !isBasketPageSmallScreenSized &&
+            !isCollectionPageSmallScreenSized
           "
           @mouseenter="hoverProfile"
           @mouseleave="hoverProfile"
@@ -186,7 +206,12 @@ function hoverMenu() {
       </div>
     </div>
     <nav
-      v-if="!isListingPage && !isMainPageSmallScreenSized && !isBasketPageSmallScreenSized"
+      v-if="
+        !isListingPage &&
+        !isMainPageSmallScreenSized &&
+        !isBasketPageSmallScreenSized &&
+        !isCollectionPageSmallScreenSized
+      "
       class="header__nav"
       :class="{ header__nav_about: isAboutPage }"
     >
