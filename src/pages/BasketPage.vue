@@ -3,7 +3,25 @@ import { inject, onMounted, onUnmounted, watch } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
 import AppAmountInput from '@/components/UI/AppAmountInput.vue'
 import AppButton from '@/components/UI/AppButton.vue'
-import basket from '@/utils/basket'
+
+const basket = [
+  {
+    name: 'Graystone vase',
+    desc: 'A timeless ceramic vase with a tri color grey glaze.',
+    price: '£85',
+    img: '/src/images/products/vase.jpg',
+    alt: 'The picture of the textured light grey vase',
+    amount: 1
+  },
+  {
+    name: 'Basic white vase',
+    desc: 'Beautiful and simple this is one for the classics collections',
+    price: '£85',
+    img: '/src/images/products/vase2.jpg',
+    alt: 'The picture of the white vase',
+    amount: 1
+  }
+]
 
 const { setIsBasketPage, setIsBasketPageSmallScreenSized } = inject('app')
 
@@ -38,21 +56,7 @@ onUnmounted(() => {
         <p class="basket__header-point">Total</p>
       </div>
       <ul class="basket__main">
-        <li key="ddkdkdkdk" class="basket__product">
-          <img class="basket__product-img" src="@/images/vase.jpg" alt="Vase img" />
-          <div class="basket__product-about-box">
-            <h4 class="basket__product-name">Vase</h4>
-            <p class="basket__product-desc">a.kdjvcn ;sdnv.jsndz. vn;sdfnv.lsnd.f</p>
-            <p class="basket__product-price">£85</p>
-          </div>
-          <app-amount-input class="basket__product-amount" place="basket"></app-amount-input>
-          <p class="basket__product-total">£85</p>
-        </li>
-        <li
-          v-for="item in basket.filter((item, index) => index === 1)"
-          :key="item.name"
-          class="basket__product"
-        >
+        <li v-for="item in basket" :key="item.name" class="basket__product">
           <img class="basket__product-img" :src="item.img" :alt="item.alt" />
           <div class="basket__product-about-box">
             <h4 class="basket__product-name">{{ item.name }}</h4>
