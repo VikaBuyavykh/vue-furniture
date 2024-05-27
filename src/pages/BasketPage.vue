@@ -3,25 +3,7 @@ import { inject, onMounted, onUnmounted, watch } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
 import AppAmountInput from '@/components/UI/AppAmountInput.vue'
 import AppButton from '@/components/UI/AppButton.vue'
-
-const basket = [
-  {
-    name: 'Graystone vase',
-    desc: 'A timeless ceramic vase with a tri color grey glaze.',
-    price: '£85',
-    img: './src/images/vase.jpg',
-    alt: 'The picture of the textured light grey vase',
-    amount: 1
-  },
-  {
-    name: 'Basic white vase',
-    desc: 'Beautiful and simple this is one for the classics collections',
-    price: '£85',
-    img: './src/images/products/vase2.jpg',
-    alt: 'The picture of the white vase',
-    amount: 1
-  }
-]
+import basket from '@/utils/basket'
 
 const { setIsBasketPage, setIsBasketPageSmallScreenSized } = inject('app')
 

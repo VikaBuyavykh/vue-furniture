@@ -6,7 +6,7 @@ import AppAmountInput from '@/components/UI/AppAmountInput.vue'
 <template>
   <section class="product">
     <div class="product__container">
-      <img class="product__img" src="@/images/products/chair2.jpg" alt="The chair photo" />
+      <img class="product__img" src="/products/chair2.jpg" alt="The chair photo" />
       <div class="product__info">
         <div class="product__name-box">
           <h2 class="product__name">The Dandy Chair</h2>

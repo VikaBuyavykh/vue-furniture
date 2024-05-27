@@ -1,54 +1,54 @@
 const collection = [
   {
-    img: './src/images/products/chair.jpg',
+    img: '/products/chair.jpg',
     alt: "Chair's image",
     name: 'The Dandy chair',
     price: 250
   },
   {
-    img: './src/images/products/vase-set.jpg',
+    img: '/products/vase-set.jpg',
     alt: "Vase set's image",
     name: 'The Dandy chair',
     price: 250
   },
   {
-    img: './src/images/products/stool.jpg',
+    img: '/products/stool.jpg',
     alt: "Stool's image",
     name: 'The Dandy chair',
     price: 250
   },
   {
-    img: './src/images/products/vase.jpg',
+    img: '/products/vase.jpg',
     alt: "Vase's image",
     name: 'The Dandy chair',
     price: 250
   },
   {
-    img: './src/images/products/lamp.jpg',
+    img: '/products/lamp.jpg',
     alt: "Lamp's image",
     name: 'The Dandy chair',
     price: 250
   },
   {
-    img: './src/images/products/chair3.jpg',
+    img: '/products/chair3.jpg',
     alt: "Chair's image",
     name: 'The Dandy chair',
     price: 250
   },
   {
-    img: './src/images/products/lamp-set.jpg',
+    img: '/products/lamp-set.jpg',
     alt: "Lamp set's image",
     name: 'The Dandy chair',
     price: 250
   },
   {
-    img: './src/images/products/vase3.jpg',
+    img: '/products/vase3.jpg',
     alt: "Vase's image",
     name: 'The Dandy chair',
     price: 250
   },
   {
-    img: './src/images/products/chair4.jpg',
+    img: '/products/chair4.jpg',
     alt: "Chair's image",
     name: 'The Dandy chair',
     price: 250
