@@ -76,13 +76,6 @@ import router from '@/router'
       &::-webkit-scrollbar {
         height: 0;
       }
-      // -ms-overflow-style: none;
-      // scrollbar-width: none;
-
-      // &::-webkit-scrollbar {
-      //   width: 0;
-      //   height: 0;
-      // }
 
       @include media_md {
         margin-block: 2.25rem 2rem;
