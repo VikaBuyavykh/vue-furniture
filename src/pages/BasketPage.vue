@@ -38,7 +38,21 @@ onUnmounted(() => {
         <p class="basket__header-point">Total</p>
       </div>
       <ul class="basket__main">
-        <li v-for="item in basket" :key="item.name" class="basket__product">
+        <li key="ddkdkdkdk" class="basket__product">
+          <img class="basket__product-img" src="@/images/vase.jpg" alt="Vase img" />
+          <div class="basket__product-about-box">
+            <h4 class="basket__product-name">Vase</h4>
+            <p class="basket__product-desc">a.kdjvcn ;sdnv.jsndz. vn;sdfnv.lsnd.f</p>
+            <p class="basket__product-price">£85</p>
+          </div>
+          <app-amount-input class="basket__product-amount" place="basket"></app-amount-input>
+          <p class="basket__product-total">£85</p>
+        </li>
+        <li
+          v-for="item in basket.filter((item, index) => index === 1)"
+          :key="item.name"
+          class="basket__product"
+        >
           <img class="basket__product-img" :src="item.img" :alt="item.alt" />
           <div class="basket__product-about-box">
             <h4 class="basket__product-name">{{ item.name }}</h4>
