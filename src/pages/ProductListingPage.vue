@@ -20,7 +20,7 @@ onUnmounted(() => {
   <main class="main">
     <app-product></app-product>
     <app-recommendation></app-recommendation>
-    <app-features></app-features>
+    <app-features page="listing"></app-features>
     <app-listing-invitation></app-listing-invitation>
   </main>
 </template>

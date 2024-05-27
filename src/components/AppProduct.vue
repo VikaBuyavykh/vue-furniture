@@ -77,7 +77,7 @@ import AppAmountInput from '@/components/UI/AppAmountInput.vue'
     }
 
     @include media_md {
-      gap: 2rem;
+      gap: 1.75rem;
     }
 
     @include media_sm {

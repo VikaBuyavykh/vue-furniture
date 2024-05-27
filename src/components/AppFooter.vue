@@ -14,7 +14,13 @@ defineProps({
 <template>
   <footer class="footer">
     <div class="footer__content">
-      <div class="footer__links-box" :class="{ 'footer__links-box_listing': isListingPage }">
+      <div
+        class="footer__links-box"
+        :class="{
+          'footer__links-box_listing': isListingPage,
+          'footer__links-box_collection': isCollectionPage
+        }"
+      >
         <div
           v-if="isListingPage"
           class="footer__address-and-socials"
@@ -147,6 +153,14 @@ defineProps({
         }
       }
 
+      &_collection {
+        padding-block: 3.5rem 3rem;
+
+        @include media_md {
+          padding-block: 2.5rem 1rem;
+        }
+      }
+
       .footer__address-and-socials {
         @include size(100%, auto);
         display: grid;
@@ -274,7 +288,7 @@ defineProps({
 
     .footer__copyright-box {
       @include size(100%, auto);
-      padding-block: 1rem 1.25rem;
+      padding-block: 1.25rem;
       border-top: 1px solid $primary;
       @include flex(row, space-between, center, 1rem);
 
@@ -296,6 +310,10 @@ defineProps({
 
       &_basket {
         padding-block: 1.5rem;
+
+        @include media_md {
+          padding-block: 1.25rem;
+        }
       }
 
       &_collection {

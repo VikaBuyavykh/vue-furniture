@@ -40,7 +40,7 @@ import AppInvitationContent from '@/components/UI/AppInvitationContent.vue'
     }
 
     @include media_sm {
-      height: 364px;
+      height: 355px;
     }
   }
 

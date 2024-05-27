@@ -35,7 +35,7 @@ import products from '@/utils/products'
 
 .products {
   @include size(100%, auto);
-  padding-block: 2.75rem 2.5rem;
+  padding-block: 2rem 2.5rem;
 
   @include media_md {
     padding-block: 1.5rem 1.75rem;

@@ -71,7 +71,7 @@ onUnmounted(() => {
   padding-block: 5.25rem;
 
   @include media_lg {
-    padding-block: 2.125rem 3rem;
+    padding-block: 2.125rem 3.125rem;
   }
 
   &__content {
@@ -159,6 +159,7 @@ onUnmounted(() => {
         }
 
         .basket__product-about-box {
+          align-self: center;
           grid-column: span 2;
           @include size(100%, auto);
           max-width: 232px;
@@ -214,11 +215,11 @@ onUnmounted(() => {
       @include size(100%, auto);
       padding-top: 1.25rem;
       border-top: 1px solid $border-grey;
-      @include flex(column, start, stretch, 1rem);
+      @include flex(column, start, stretch, 0.75rem);
 
       @include media_lg {
         gap: 2.25rem;
-        padding-top: 1rem;
+        padding-top: 0.75rem;
       }
 
       .basket__sum-box {

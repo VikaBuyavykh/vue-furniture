@@ -7,7 +7,10 @@ defineProps({
 </script>
 
 <template>
-  <section class="features" :class="{ features_about: page === 'about' }">
+  <section
+    class="features"
+    :class="{ features_about: page === 'about', features_listing: page === 'listing' }"
+  >
     <div class="features__container">
       <h3 class="features__title">What makes our brand different</h3>
       <ul class="features__list" :class="{ features__list_about: page === 'about' }">
@@ -18,8 +21,18 @@ defineProps({
           :class="{ 'features__list-item_about': page === 'about' }"
         >
           <img class="features__list-item-img" :src="item.img" :alt="item.alt" />
-          <h4 class="features__list-item-title">{{ item.name }}</h4>
-          <p class="features__list-item-desc">{{ item.text }}</p>
+          <h4
+            class="features__list-item-title"
+            :class="{ 'features__list-item-title_about': page === 'about' }"
+          >
+            {{ item.name }}
+          </h4>
+          <p
+            class="features__list-item-desc"
+            :class="{ 'features__list-item-desc_about': page === 'about' }"
+          >
+            {{ item.text }}
+          </p>
         </li>
       </ul>
     </div>
@@ -40,16 +53,25 @@ defineProps({
   }
 
   &_about {
-    padding-block: 3.75rem 4.25rem;
+    padding-block: 1rem 4.5rem;
 
     @include media_md {
-      padding-bottom: 2.75rem;
+      padding-block: 1.125rem 2.875rem;
+    }
+  }
+
+  &_listing {
+    padding-block: 2.25rem 5rem;
+
+    @include media_md {
+      padding-block: 0.25rem 3.25rem;
     }
   }
 
   &__container {
     @extend %sizing;
     @include flex(column, start, center, 2.25rem);
+    padding-top: 2.75rem;
 
     @include media_sm {
       gap: 2.25rem;
@@ -82,7 +104,7 @@ defineProps({
       @include media_sm {
         grid-template-columns: 1fr;
         grid-template-rows: repeat(4, 1fr);
-        gap: 1.875rem;
+        gap: 1.5rem;
       }
 
       &_about {
@@ -109,15 +131,25 @@ defineProps({
             gap: 0.875rem;
           }
 
-          .features__list-item-title {
-            font-size: 1rem;
-            line-height: 1.4rem;
-          }
+          // .features__list-item-title {
+          //   font-size: 1rem;
+          //   line-height: 1.4rem;
 
-          .features__list-item-desc {
-            font-size: 0.875rem;
-            line-height: 1.3125rem;
-          }
+          //   &_about {
+          //     font-size: 1.25rem;
+          //     line-height: 1.75rem;
+          //   }
+          // }
+
+          // .features__list-item-desc {
+          //   font-size: 0.875rem;
+          //   line-height: 1.3125rem;
+
+          //   &_about {
+          //     font-size: 1rem;
+          //     line-height: 1.5rem;
+          //   }
+          // }
         }
 
         &-img {
@@ -126,10 +158,20 @@ defineProps({
 
         &-title {
           @extend %h4;
+
+          @include media_md {
+            font-size: 1rem;
+            line-height: 1.4rem;
+          }
         }
 
         &-desc {
           @extend %body-medium;
+
+          @include media_md {
+            font-size: 0.875rem;
+            line-height: 1.3125rem;
+          }
         }
       }
     }

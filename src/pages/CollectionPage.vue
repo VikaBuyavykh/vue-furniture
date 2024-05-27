@@ -153,7 +153,7 @@ onUnmounted(() => {
     @include media_md {
       grid-template-columns: 1fr;
       gap: 3rem;
-      padding-block: 1.25rem 1.75rem;
+      padding-block: 1.25rem 1.5rem;
     }
 
     .collection__selects {
