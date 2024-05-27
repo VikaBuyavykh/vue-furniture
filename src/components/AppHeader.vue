@@ -371,13 +371,21 @@ function hoverMenu() {
     @include size(96.25%, auto);
     max-width: 1386px;
     padding-block: 1.25rem;
-    overflow-x: scroll;
 
     &_about {
       @include size(100%, auto);
       max-width: unset;
       background-color: $light-grey;
       padding-block: 1rem;
+      //overflow-x: scroll;
+      overflow: auto;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+      }
     }
 
     &-list {
