@@ -3,7 +3,7 @@ const basket = [
     name: 'Graystone vase',
     desc: 'A timeless ceramic vase with a tri color grey glaze.',
     price: '£85',
-    img: '/src/images/vase.jpg',
+    img: '@/images/vase.jpg',
     alt: 'The picture of the textured light grey vase',
     amount: 1
   },
