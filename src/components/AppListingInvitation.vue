@@ -28,7 +28,7 @@ import AppInvitationContent from '@/components/UI/AppInvitationContent.vue'
 
   @include media_md {
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(2, minmax(280px, max-content));
+    grid-template-rows: repeat(2, minmax(284px, max-content));
   }
 
   &__img {
@@ -40,7 +40,7 @@ import AppInvitationContent from '@/components/UI/AppInvitationContent.vue'
     }
 
     @include media_sm {
-      height: 355px;
+      height: 358px;
     }
   }
 
@@ -50,7 +50,7 @@ import AppInvitationContent from '@/components/UI/AppInvitationContent.vue'
 
     @include media_lg {
       width: 100%;
-      padding: 2.25rem 1.5rem 2.875rem;
+      padding: 2.25rem 1.5rem 2.75rem;
     }
   }
 }

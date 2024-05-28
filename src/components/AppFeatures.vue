@@ -13,12 +13,21 @@ defineProps({
   >
     <div class="features__container">
       <h3 class="features__title">What makes our brand different</h3>
-      <ul class="features__list" :class="{ features__list_about: page === 'about' }">
+      <ul
+        class="features__list"
+        :class="{
+          features__list_about: page === 'about',
+          features__list_listing: page === 'listing'
+        }"
+      >
         <li
           v-for="item in features"
           :key="item.name"
           class="features__list-item"
-          :class="{ 'features__list-item_about': page === 'about' }"
+          :class="{
+            'features__list-item_about': page === 'about',
+            'features__list-item_listing': page === 'listing'
+          }"
         >
           <img class="features__list-item-img" :src="item.img" :alt="item.alt" />
           <h4
@@ -46,7 +55,7 @@ defineProps({
 
 .features {
   @include size(100%, auto);
-  padding-block: 5rem;
+  padding-block: 2.5rem 5rem;
 
   @include media_md {
     padding-block: 0.25rem;
@@ -113,9 +122,15 @@ defineProps({
         }
       }
 
+      &_listing {
+        @include media_md {
+          gap: 1.5rem;
+        }
+      }
+
       &-item {
         background-color: $light-grey;
-        padding: 3rem;
+        padding: 2.75rem 3rem 3rem;
         @include flex(column, start, start, 0.75rem);
 
         @include media_sm {
@@ -130,26 +145,14 @@ defineProps({
             padding: 0;
             gap: 0.875rem;
           }
+        }
 
-          // .features__list-item-title {
-          //   font-size: 1rem;
-          //   line-height: 1.4rem;
+        &_listing {
+          gap: 1rem;
 
-          //   &_about {
-          //     font-size: 1.25rem;
-          //     line-height: 1.75rem;
-          //   }
-          // }
-
-          // .features__list-item-desc {
-          //   font-size: 0.875rem;
-          //   line-height: 1.3125rem;
-
-          //   &_about {
-          //     font-size: 1rem;
-          //     line-height: 1.5rem;
-          //   }
-          // }
+          @include media_md {
+            gap: 0.875rem;
+          }
         }
 
         &-img {
@@ -159,18 +162,22 @@ defineProps({
         &-title {
           @extend %h4;
 
-          @include media_md {
-            font-size: 1rem;
-            line-height: 1.4rem;
+          &_about {
+            @include media_md {
+              font-size: 1rem;
+              line-height: 1.4rem;
+            }
           }
         }
 
         &-desc {
           @extend %body-medium;
 
-          @include media_md {
-            font-size: 0.875rem;
-            line-height: 1.3125rem;
+          &_about {
+            @include media_md {
+              font-size: 0.875rem;
+              line-height: 1.3125rem;
+            }
           }
         }
       }

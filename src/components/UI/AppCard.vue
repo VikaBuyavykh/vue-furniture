@@ -77,7 +77,7 @@ defineProps({
 
     &_place_listing {
       @include media_xl {
-        height: 251px;
+        height: 256px;
         min-width: 200px;
       }
     }

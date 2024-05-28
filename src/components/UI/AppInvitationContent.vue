@@ -96,6 +96,11 @@ defineProps({
       @extend %body-medium;
       color: $medium-blue;
       text-align: left;
+      width: 80%;
+
+      @include media_md {
+        width: 100%;
+      }
     }
   }
 
