@@ -1,14 +1,10 @@
 <script setup>
+import { usePageStore } from '@/stores/page'
 import AppEmailInput from '@/components/UI/AppEmailInput.vue'
 import sections from '@/utils/sections'
 import socials from '@/utils/socials'
 
-defineProps({
-  isListingPage: Boolean,
-  isAboutPage: Boolean,
-  isBasketPage: Boolean,
-  isCollectionPage: Boolean
-})
+const page = usePageStore()
 </script>
 
 <template>
@@ -17,14 +13,14 @@ defineProps({
       <div
         class="footer__links-box"
         :class="{
-          'footer__links-box_listing': isListingPage,
-          'footer__links-box_collection': isCollectionPage
+          'footer__links-box_listing': page.isListingPage,
+          'footer__links-box_collection': page.isCollectionPage
         }"
       >
         <div
-          v-if="isListingPage"
+          v-if="page.isListingPage"
           class="footer__address-and-socials"
-          :class="{ 'footer__address-and-socials_listing': isListingPage }"
+          :class="{ 'footer__address-and-socials_listing': page.isListingPage }"
         >
           <div class="footer__address-group">
             <h2 class="footer__logo">Avion</h2>
@@ -39,7 +35,7 @@ defineProps({
           </div>
           <div class="footer__socials-group">
             <h3 class="footer__socials-title">Social links</h3>
-            <ul class="footer__socials" :class="{ footer__socials_listing: isListingPage }">
+            <ul class="footer__socials" :class="{ footer__socials_listing: page.isListingPage }">
               <li v-for="item in socials" :key="item.img" class="footer__socials-item">
                 <a :href="item.link">
                   <img :src="item.img" :alt="item.alt" />
@@ -53,7 +49,7 @@ defineProps({
             v-for="section in sections"
             :key="section.section"
             class="footer__col"
-            :class="{ footer__col_listing: isListingPage }"
+            :class="{ footer__col_listing: page.isListingPage }"
           >
             <h5 class="footer__col-title">{{ section.section }}</h5>
             <ul class="footer__col-links">
@@ -63,7 +59,7 @@ defineProps({
             </ul>
           </li>
         </ul>
-        <div v-if="!isListingPage" class="footer__input-group">
+        <div v-if="!page.isListingPage" class="footer__input-group">
           <label class="footer__label" for="email">Join our mailing list</label>
           <app-email-input theme="dark" class="footer__input"></app-email-input>
         </div>
@@ -71,14 +67,14 @@ defineProps({
       <div
         class="footer__copyright-box"
         :class="{
-          'footer__copyright-box_listing': isListingPage,
-          'footer__copyright-box_about': isAboutPage,
-          'footer__copyright-box_basket': isBasketPage,
-          'footer__copyright-box_collection': isCollectionPage
+          'footer__copyright-box_listing': page.isListingPage,
+          'footer__copyright-box_about': page.isAboutPage,
+          'footer__copyright-box_basket': page.isBasketPage,
+          'footer__copyright-box_collection': page.isCollectionPage
         }"
       >
         <p class="footer__copyright">Copyright 2022 Avion LTD</p>
-        <ul v-if="!isListingPage" class="footer__socials">
+        <ul v-if="!page.isListingPage" class="footer__socials">
           <li v-for="item in socials" :key="item.img" class="footer__socials-item">
             <a class="footer__socials-link" :href="item.link">
               <img class="footer__link-img" :src="item.img" :alt="item.alt" />

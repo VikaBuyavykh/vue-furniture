@@ -2,6 +2,7 @@
 import { useMediaQuery } from '@vueuse/core'
 import AppButton from '@/components/UI/AppButton.vue'
 import router from '@/router'
+
 const isLargeScreenSize = useMediaQuery('(min-width: 801px)')
 </script>
 

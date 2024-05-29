@@ -1,24 +1,15 @@
 <script setup>
-import { inject, ref } from 'vue'
-import navLinks from '@/utils/navLinks'
+import { usePageStore } from '@/stores/page'
+import { useHoverStore } from '@/stores/hover'
+import { usePopupStore } from '@/stores/popup'
+import { useFormStore } from '@/stores/form'
 import router from '@/router'
+import navLinks from '@/utils/navLinks'
 
-defineProps({
-  isAboutPage: Boolean,
-  isListingPage: Boolean,
-  isMainPageSmallScreenSized: Boolean,
-  isAboutPageSmallScreenSized: Boolean,
-  isBasketPageSmallScreenSized: Boolean,
-  isCollectionPageSmallScreenSized: Boolean
-})
-
-const { setIsPopupVisible } = inject('app')
-
-const searchQuery = ref('')
-const isCartHovered = ref(false)
-const isProfileHovered = ref(false)
-const isLoupeHovered = ref(false)
-const isMenuHovered = ref(false)
+const page = usePageStore()
+const hover = useHoverStore()
+const popup = usePopupStore()
+const form = useFormStore()
 
 function search() {
   router.push('/collection')
@@ -26,49 +17,33 @@ function search() {
     document.querySelector('#search').focus()
   }, 0)
 }
-
-function hoverCart() {
-  isCartHovered.value = !isCartHovered.value
-}
-
-function hoverProfile() {
-  isProfileHovered.value = !isProfileHovered.value
-}
-
-function hoverLoupe() {
-  isLoupeHovered.value = !isLoupeHovered.value
-}
-
-function hoverMenu() {
-  isMenuHovered.value = !isMenuHovered.value
-}
 </script>
 
 <template>
   <header class="header">
     <div
       class="header__row"
-      :class="{ header__row_about: isAboutPage, header__row_listing: isListingPage }"
+      :class="{ header__row_about: page.isAboutPage, header__row_listing: page.isListingPage }"
     >
       <div
         class="header__input-box"
         v-if="
-          !isAboutPage &&
-          !isListingPage &&
-          !isMainPageSmallScreenSized &&
-          !isBasketPageSmallScreenSized &&
-          !isCollectionPageSmallScreenSized
+          !page.isAboutPage &&
+          !page.isListingPage &&
+          !page.isMainPageSmallScreenSized &&
+          !page.isBasketPageSmallScreenSized &&
+          !page.isCollectionPageSmallScreenSized
         "
       >
         <img
-          @mouseenter="hoverLoupe"
-          @mouseleave="hoverLoupe"
+          @mouseenter="() => (hover.isLoupeHovered = true)"
+          @mouseleave="() => (hover.isLoupeHovered = false)"
           class="header__input-btn"
-          :src="isLoupeHovered ? '/search-active.svg' : '/search.svg'"
+          :src="hover.isLoupeHovered ? '/search-active.svg' : '/search.svg'"
           alt="Icon of search-button"
         />
         <input
-          v-model="searchQuery"
+          v-model="form.searchQuery"
           class="header__input"
           type="search"
           name="search"
@@ -80,18 +55,18 @@ function hoverMenu() {
         class="header__name"
         :class="{
           header__name_about:
-            isAboutPage ||
-            isMainPageSmallScreenSized ||
-            isBasketPageSmallScreenSized ||
-            isCollectionPageSmallScreenSized
+            page.isAboutPage ||
+            page.isMainPageSmallScreenSized ||
+            page.isBasketPageSmallScreenSized ||
+            page.isCollectionPageSmallScreenSized
         }"
       >
         Avion
       </h1>
       <ul
-        v-if="isListingPage"
+        v-if="page.isListingPage"
         class="header__nav-list"
-        :class="{ 'header__nav-list_listing': isListingPage }"
+        :class="{ 'header__nav-list_listing': page.isListingPage }"
       >
         <li v-for="link in navLinks" :key="link.name" class="header__nav-list-item">
           <router-link class="header__nav-list-link" :to="link.link">{{ link.name }}</router-link>
@@ -101,38 +76,39 @@ function hoverMenu() {
         class="header__buttons"
         :class="{
           header__buttons_about:
-            isAboutPage ||
-            isMainPageSmallScreenSized ||
-            isBasketPageSmallScreenSized ||
-            isCollectionPageSmallScreenSized,
-          header__buttons_basket: isBasketPageSmallScreenSized || isCollectionPageSmallScreenSized
+            page.isAboutPage ||
+            page.isMainPageSmallScreenSized ||
+            page.isBasketPageSmallScreenSized ||
+            page.isCollectionPageSmallScreenSized,
+          header__buttons_basket:
+            page.isBasketPageSmallScreenSized || page.isCollectionPageSmallScreenSized
         }"
       >
         <div
           class="header__input-box header__input-box_listing"
           v-if="
-            isListingPage ||
-            isMainPageSmallScreenSized ||
-            isBasketPageSmallScreenSized ||
-            isCollectionPageSmallScreenSized
+            page.isListingPage ||
+            page.isMainPageSmallScreenSized ||
+            page.isBasketPageSmallScreenSized ||
+            page.isCollectionPageSmallScreenSized
           "
         >
           <img
-            @mouseenter="hoverLoupe"
-            @mouseleave="hoverLoupe"
+            @mouseenter="() => (hover.isLoupeHovered = true)"
+            @mouseleave="() => (hover.isLoupeHovered = false)"
             class="header__input-btn"
-            :src="isLoupeHovered ? '/search-active.svg' : '/search.svg'"
+            :src="hover.isLoupeHovered ? '/search-active.svg' : '/search.svg'"
             alt="Icon of search-button"
           />
           <input
-            v-model="searchQuery"
+            v-model="form.searchQuery"
             class="header__input"
             type="search"
             name="search"
             id="search"
           />
         </div>
-        <nav class="header__sections-menu" v-if="isAboutPage">
+        <nav class="header__sections-menu" v-if="page.isAboutPage">
           <router-link class="header__menu-item" to="#">About us</router-link>
           <router-link class="header__menu-item" to="#">Contact</router-link>
           <router-link class="header__menu-item" to="#">Blog</router-link>
@@ -142,64 +118,64 @@ function hoverMenu() {
           @mouseleave="hoverLoupe"
           @click="search"
           v-if="
-            isAboutPage &&
-            !isAboutPageSmallScreenSized &&
-            !isBasketPageSmallScreenSized &&
-            !isCollectionPageSmallScreenSized
+            page.isAboutPage &&
+            !page.isAboutPageSmallScreenSized &&
+            !page.isBasketPageSmallScreenSized &&
+            !page.isCollectionPageSmallScreenSized
           "
           class="header__btn"
         >
           <img
             class="header__btn-img"
-            :src="isLoupeHovered ? '/search-active.svg' : '/search.svg'"
+            :src="hover.isLoupeHovered ? '/search-active.svg' : '/search.svg'"
             alt="Cart of search"
           />
         </button>
         <button
           v-if="
-            !isMainPageSmallScreenSized &&
-            !isAboutPageSmallScreenSized &&
-            !isBasketPageSmallScreenSized &&
-            !isCollectionPageSmallScreenSized
+            !page.isMainPageSmallScreenSized &&
+            !page.isAboutPageSmallScreenSized &&
+            !page.isBasketPageSmallScreenSized &&
+            !page.isCollectionPageSmallScreenSized
           "
-          @mouseenter="hoverCart"
-          @mouseleave="hoverCart"
+          @mouseenter="() => (hover.isCartHovered = true)"
+          @mouseleave="() => (hover.isCartHovered = false)"
           class="header__btn"
           type="button"
           @click="() => router.push('/basket')"
         >
           <img
             class="header__btn-img"
-            :src="isCartHovered ? '/cart-active.svg' : '/cart.svg'"
+            :src="hover.isCartHovered ? '/cart-active.svg' : '/cart.svg'"
             alt="Cart icon"
           />
         </button>
         <button
           v-if="
-            !isMainPageSmallScreenSized &&
-            !isAboutPageSmallScreenSized &&
-            !isBasketPageSmallScreenSized &&
-            !isCollectionPageSmallScreenSized
+            !page.isMainPageSmallScreenSized &&
+            !page.isAboutPageSmallScreenSized &&
+            !page.isBasketPageSmallScreenSized &&
+            !page.isCollectionPageSmallScreenSized
           "
-          @mouseenter="hoverProfile"
-          @mouseleave="hoverProfile"
+          @mouseenter="() => (hover.isProfileHovered = true)"
+          @mouseleave="() => (hover.isProfileHovered = false)"
           class="header__btn"
         >
           <img
             class="header__btn-img"
-            :src="isProfileHovered ? '/profile-active.svg' : '/profile.svg'"
+            :src="hover.isProfileHovered ? '/profile-active.svg' : '/profile.svg'"
             alt="Profile icon"
           />
         </button>
         <button
-          @mouseenter="hoverMenu"
-          @mouseleave="hoverMenu"
+          @mouseenter="() => (hover.isMenuHovered = true)"
+          @mouseleave="() => (hover.isMenuHovered = false)"
           class="header__btn header__btn_menu"
-          @click="() => setIsPopupVisible(true)"
+          @click="() => (popup.isPopupVisible = true)"
         >
           <img
             class="header__btn-img"
-            :src="isMenuHovered ? '/menu-active.svg' : '/menu.svg'"
+            :src="hover.isMenuHovered ? '/menu-active.svg' : '/menu.svg'"
             alt="Menu icon"
           />
         </button>
@@ -207,16 +183,16 @@ function hoverMenu() {
     </div>
     <nav
       v-if="
-        !isListingPage &&
-        !isMainPageSmallScreenSized &&
-        !isBasketPageSmallScreenSized &&
-        !isCollectionPageSmallScreenSized
+        !page.isListingPage &&
+        !page.isMainPageSmallScreenSized &&
+        !page.isBasketPageSmallScreenSized &&
+        !page.isCollectionPageSmallScreenSized
       "
       class="header__nav"
-      :class="{ header__nav_about: isAboutPage }"
+      :class="{ header__nav_about: page.isAboutPage }"
     >
       <ul class="header__nav-list">
-        <li v-if="isAboutPage" key="All products" class="header__nav-list-item">
+        <li v-if="page.isAboutPage" key="All products" class="header__nav-list-item">
           <router-link class="header__nav-list-link" to="/collection">All products</router-link>
         </li>
         <li v-for="link in navLinks" :key="link.name" class="header__nav-list-item">

@@ -1,87 +1,19 @@
 <script setup>
-import { provide, ref } from 'vue'
+import { usePopupStore } from '@/stores/popup'
 import AppHeader from '@/components/AppHeader.vue'
 import AppFooter from '@/components/AppFooter.vue'
 import AppPopup from '@/components/AppPopup.vue'
 
-const isMainPageSmallScreenSized = ref(false)
-const isAboutPageSmallScreenSized = ref(false)
-const isBasketPageSmallScreenSized = ref(false)
-const isCollectionPageSmallScreenSized = ref(false)
-const isAboutPage = ref(false)
-const isListingPage = ref(false)
-const isBasketPage = ref(false)
-const isCollectionPage = ref(false)
-const isPopupVisible = ref(false)
-
-function setIsMainPageSmallScreenSized(value) {
-  isMainPageSmallScreenSized.value = value
-}
-
-function setIsAboutPageSmallScreenSized(value) {
-  isAboutPageSmallScreenSized.value = value
-}
-
-function setIsBasketPageSmallScreenSized(value) {
-  isBasketPageSmallScreenSized.value = value
-}
-
-function setIsCollectionPageSmallScreenSized(value) {
-  isCollectionPageSmallScreenSized.value = value
-}
-
-function setIsAboutPage(value) {
-  isAboutPage.value = value
-}
-
-function setIsCollectionPage(value) {
-  isCollectionPage.value = value
-}
-
-function setIsBasketPage(value) {
-  isBasketPage.value = value
-}
-
-function setIsListingPage(value) {
-  isListingPage.value = value
-}
-
-function setIsPopupVisible(value) {
-  isPopupVisible.value = value
-}
-
-provide('app', {
-  setIsAboutPage,
-  setIsListingPage,
-  setIsPopupVisible,
-  setIsMainPageSmallScreenSized,
-  setIsAboutPageSmallScreenSized,
-  setIsBasketPage,
-  setIsBasketPageSmallScreenSized,
-  setIsCollectionPageSmallScreenSized,
-  setIsCollectionPage
-})
+const popup = usePopupStore()
 </script>
 
 <template>
   <div class="page">
-    <app-header
-      :isAboutPage="isAboutPage"
-      :isListingPage="isListingPage"
-      :isMainPageSmallScreenSized="isMainPageSmallScreenSized"
-      :isAboutPageSmallScreenSized="isAboutPageSmallScreenSized"
-      :isBasketPageSmallScreenSized="isBasketPageSmallScreenSized"
-      :isCollectionPageSmallScreenSized="isCollectionPageSmallScreenSized"
-    ></app-header>
+    <app-header></app-header>
     <router-view></router-view>
-    <app-footer
-      :isListingPage="isListingPage"
-      :isAboutPage="isAboutPage"
-      :isBasketPage="isBasketPage"
-      :isCollectionPage="isCollectionPage"
-    ></app-footer>
+    <app-footer></app-footer>
     <Transition name="fade">
-      <app-popup v-if="isPopupVisible" :isAboutPage="isAboutPage"></app-popup>
+      <app-popup v-if="popup.isPopupVisible"></app-popup>
     </Transition>
   </div>
 </template>

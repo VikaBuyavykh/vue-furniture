@@ -1,27 +1,19 @@
 <script setup>
-import { inject, onMounted, onUnmounted, watch } from 'vue'
-import { useMediaQuery } from '@vueuse/core'
+import { onMounted, onUnmounted } from 'vue'
+import { usePageStore } from '@/stores/page'
 import AppFeatures from '@/components/AppFeatures.vue'
 import AppHistory from '@/components/AppHistory.vue'
 import AppInvitation from '@/components/AppInvitation.vue'
 import AppTagline from '@/components/AppTagline.vue'
 
-const { setIsAboutPage, setIsAboutPageSmallScreenSized } = inject('app')
-
-const isSmallScreen = useMediaQuery('(max-width: 1000px)')
-
-watch(isSmallScreen, () => {
-  isSmallScreen.value ? setIsAboutPageSmallScreenSized(true) : setIsAboutPageSmallScreenSized(false)
-})
+const page = usePageStore()
 
 onMounted(() => {
-  isSmallScreen.value ? setIsAboutPageSmallScreenSized(true) : setIsAboutPageSmallScreenSized(false)
-  setIsAboutPage(true)
+  page.isAboutPage = true
 })
 
 onUnmounted(() => {
-  setIsAboutPage(false)
-  setIsAboutPageSmallScreenSized(false)
+  page.isAboutPage = false
 })
 </script>
 

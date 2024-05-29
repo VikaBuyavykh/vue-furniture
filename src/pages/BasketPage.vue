@@ -1,30 +1,18 @@
 <script setup>
-import { inject, onMounted, onUnmounted, watch } from 'vue'
-import { useMediaQuery } from '@vueuse/core'
+import { onMounted, onUnmounted } from 'vue'
+import { usePageStore } from '@/stores/page'
 import AppAmountInput from '@/components/UI/AppAmountInput.vue'
 import AppButton from '@/components/UI/AppButton.vue'
 import basket from '@/utils/basket'
 
-const { setIsBasketPage, setIsBasketPageSmallScreenSized } = inject('app')
-
-const isSmallScreen = useMediaQuery('(max-width: 1000px)')
-
-watch(isSmallScreen, () => {
-  isSmallScreen.value
-    ? setIsBasketPageSmallScreenSized(true)
-    : setIsBasketPageSmallScreenSized(false)
-})
+const page = usePageStore()
 
 onMounted(() => {
-  setIsBasketPage(true)
-  isSmallScreen.value
-    ? setIsBasketPageSmallScreenSized(true)
-    : setIsBasketPageSmallScreenSized(false)
+  page.isBasketPage = true
 })
 
 onUnmounted(() => {
-  setIsBasketPage(false)
-  setIsBasketPageSmallScreenSized(false)
+  page.isBasketPage = false
 })
 </script>
 

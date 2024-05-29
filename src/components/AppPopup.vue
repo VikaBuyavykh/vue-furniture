@@ -1,34 +1,28 @@
 <script setup>
-import { inject, ref } from 'vue'
+import { usePageStore } from '@/stores/page'
+import { useHoverStore } from '@/stores/hover'
+import { usePopupStore } from '@/stores/popup'
 import navLinks from '@/utils/navLinks'
 
-defineProps({
-  isAboutPage: Boolean
-})
-
-const { setIsPopupVisible } = inject('app')
-
-const isCloseHovered = ref(false)
-
-function hoverClose() {
-  isCloseHovered.value = !isCloseHovered.value
-}
+const page = usePageStore()
+const hover = useHoverStore()
+const popup = usePopupStore()
 </script>
 
 <template>
-  <div class="popup" @click="() => setIsPopupVisible(false)">
+  <div class="popup" @click="() => (popup.isPopupVisible = false)">
     <div @click.stop class="popup__content">
       <img
-        @mouseenter="hoverClose"
-        @mouseleave="hoverClose"
-        @click="() => setIsPopupVisible(false)"
-        :src="isCloseHovered ? '/close-active.svg' : '/close.svg'"
+        @mouseenter="() => (hover.isCloseHovered = true)"
+        @mouseleave="() => (hover.isCloseHovered = false)"
+        @click="() => (popup.isPopupVisible = false)"
+        :src="hover.isCloseHovered ? '/close-active.svg' : '/close.svg'"
         alt="Close icon"
         class="popup__close"
       />
-      <nav v-if="!isAboutPage" class="popup__menu">
+      <nav v-if="!page.isAboutPage" class="popup__menu">
         <router-link
-          @click="() => setIsPopupVisible(false)"
+          @click="() => (popup.isPopupVisible = false)"
           class="popup__link"
           v-for="item in navLinks"
           :key="item.name"
@@ -36,27 +30,27 @@ function hoverClose() {
           >{{ item.name }}</router-link
         >
         <div class="popup__separator"></div>
-        <router-link @click="() => setIsPopupVisible(false)" class="popup__link" to="#"
+        <router-link @click="() => (popup.isPopupVisible = false)" class="popup__link" to="#"
           >Profile</router-link
         >
-        <router-link @click="() => setIsPopupVisible(false)" class="popup__link" to="/basket"
+        <router-link @click="() => (popup.isPopupVisible = false)" class="popup__link" to="/basket"
           >Cart</router-link
         >
       </nav>
       <nav v-else class="popup__menu">
-        <router-link @click="() => setIsPopupVisible(false)" class="popup__link" to="#"
+        <router-link @click="() => (popup.isPopupVisible = false)" class="popup__link" to="#"
           >Profile</router-link
         >
-        <router-link @click="() => setIsPopupVisible(false)" class="popup__link" to="/basket"
+        <router-link @click="() => (popup.isPopupVisible = false)" class="popup__link" to="/basket"
           >Cart</router-link
         >
-        <router-link @click="() => setIsPopupVisible(false)" class="popup__link" to="/about"
+        <router-link @click="() => (popup.isPopupVisible = false)" class="popup__link" to="/about"
           >About us</router-link
         >
-        <router-link @click="() => setIsPopupVisible(false)" class="popup__link" to="#"
+        <router-link @click="() => (popup.isPopupVisible = false)" class="popup__link" to="#"
           >Contact</router-link
         >
-        <router-link @click="() => setIsPopupVisible(false)" class="popup__link" to="#"
+        <router-link @click="() => (popup.isPopupVisible = false)" class="popup__link" to="#"
           >Blog</router-link
         >
       </nav>

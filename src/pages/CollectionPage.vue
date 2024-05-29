@@ -1,17 +1,17 @@
 <script setup>
-import { inject, onMounted, onUnmounted, ref, watch } from 'vue'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
+import { usePageStore } from '@/stores/page'
 import AppCard from '@/components/UI/AppCard.vue'
 import collection from '@/utils/collection'
 import AppButton from '@/components/UI/AppButton.vue'
 import filters from '@/utils/filters'
 
-const { setIsCollectionPageSmallScreenSized, setIsCollectionPage } = inject('app')
+const page = usePageStore()
 
 const addIndex = ref(3)
 const numberOfPics = ref(3)
 const isScreenXl = useMediaQuery('(min-width: 1201px)')
-const isSmallScreen = useMediaQuery('(max-width: 1000px)')
 
 function loadMore() {
   numberOfPics.value = numberOfPics.value + addIndex.value
@@ -23,24 +23,14 @@ watch(isScreenXl, () => {
   x > 0 ? (numberOfPics.value = x) : (numberOfPics.value = addIndex.value)
 })
 
-watch(isSmallScreen, () => {
-  isSmallScreen.value
-    ? setIsCollectionPageSmallScreenSized(true)
-    : setIsCollectionPageSmallScreenSized(false)
-})
-
 onMounted(() => {
-  setIsCollectionPage(true)
+  page.isCollectionPage = true
   isScreenXl.value ? (numberOfPics.value = 3) : (numberOfPics.value = 2)
   isScreenXl.value ? (addIndex.value = 3) : (addIndex.value = 2)
-  isSmallScreen.value
-    ? setIsCollectionPageSmallScreenSized(true)
-    : setIsCollectionPageSmallScreenSized(false)
 })
 
 onUnmounted(() => {
-  setIsCollectionPage(false)
-  setIsCollectionPageSmallScreenSized(false)
+  page.isCollectionPage = false
 })
 </script>
 

@@ -1,18 +1,19 @@
 <script setup>
-import { inject, onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
+import { usePageStore } from '@/stores/page'
 import AppProduct from '@/components/AppProduct.vue'
 import AppRecommendation from '@/components/AppRecommendation.vue'
 import AppFeatures from '@/components/AppFeatures.vue'
 import AppListingInvitation from '@/components/AppListingInvitation.vue'
 
-const { setIsListingPage } = inject('app')
+const page = usePageStore()
 
 onMounted(() => {
-  setIsListingPage(true)
+  page.isListingPage = true
 })
 
 onUnmounted(() => {
-  setIsListingPage(false)
+  page.isListingPage = false
 })
 </script>
 
