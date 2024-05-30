@@ -1,10 +1,27 @@
 <script setup>
+import { onMounted } from 'vue'
+import axios from 'axios'
 import { usePopupStore } from '@/stores/popup'
+import { useProductStore } from '@/stores/products'
 import AppHeader from '@/components/AppHeader.vue'
 import AppFooter from '@/components/AppFooter.vue'
 import AppPopup from '@/components/AppPopup.vue'
 
 const popup = usePopupStore()
+const product = useProductStore()
+
+async function getProducts() {
+  try {
+    const { data } = await axios.get('https://e7067c4f8e5566a0.mokky.dev/products')
+    product.products = data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+onMounted(() => {
+  getProducts()
+})
 </script>
 
 <template>

@@ -1,8 +1,10 @@
 <script setup>
+import { useProductStore } from '@/stores/products'
 import AppButton from '@/components/UI/AppButton.vue'
 import AppCard from '@/components/UI/AppCard.vue'
 import router from '@/router'
-import products from '@/utils/products'
+
+const product = useProductStore()
 </script>
 
 <template>
@@ -10,8 +12,9 @@ import products from '@/utils/products'
     <div class="products__container">
       <ul class="products__list">
         <app-card
-          v-for="item in products"
-          :key="item.name"
+          v-for="item in product.products.filter((item) => item.section === 'products')"
+          :key="item.id"
+          :id="item.id"
           :img="item.img"
           :alt="item.alt"
           :name="item.name"

@@ -1,8 +1,10 @@
 <script setup>
+import { useProductStore } from '@/stores/products'
 import AppButton from '@/components/UI/AppButton.vue'
-import recommendation from '@/utils/recommendation'
 import AppCard from '@/components/UI/AppCard.vue'
 import router from '@/router'
+
+const product = useProductStore()
 </script>
 
 <template>
@@ -11,8 +13,9 @@ import router from '@/router'
       <h3 class="recommendation_title">You might also love these</h3>
       <ul class="recommendation_list">
         <app-card
-          v-for="item in recommendation"
-          :key="item.img"
+          v-for="item in product.products.filter((item) => item.section === 'recommendation')"
+          :key="item.id"
+          :id="item.id"
           :img="item.img"
           :alt="item.alt"
           :name="item.name"

@@ -1,7 +1,9 @@
 <script setup>
 import router from '@/router'
+import { useProductStore } from '@/stores/products'
 
 defineProps({
+  id: Number,
   img: String,
   alt: String,
   name: String,
@@ -9,10 +11,22 @@ defineProps({
   horizontal: Boolean,
   place: String
 })
+
+const product = useProductStore()
 </script>
 
 <template>
-  <li @click="() => router.push('/product')" class="card" :class="{ card_horizontal: horizontal }">
+  <li
+    :id="id"
+    @click="
+      (e) => {
+        product.currentProductId = e.currentTarget.id
+        router.push(`/products/${product.currentProductId}`)
+      }
+    "
+    class="card"
+    :class="{ card_horizontal: horizontal }"
+  >
     <img
       class="card__img"
       :class="{

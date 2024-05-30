@@ -1,41 +1,48 @@
 <script setup>
+import { useProductStore } from '@/stores/products'
 import AppButton from '@/components/UI/AppButton.vue'
 import AppAmountInput from '@/components/UI/AppAmountInput.vue'
+import { onMounted } from 'vue'
+
+const product = useProductStore()
+onMounted(() => {
+  console.log(product.currentProduct)
+})
 </script>
 
 <template>
-  <section class="product">
+  <section v-if="product.currentProduct" class="product">
     <div class="product__container">
-      <img class="product__img" src="/products/chair2.jpg" alt="The chair photo" />
+      <img
+        class="product__img"
+        :src="product.currentProduct.img"
+        :alt="product.currentProduct.alt"
+      />
       <div class="product__info">
         <div class="product__name-box">
-          <h2 class="product__name">The Dandy Chair</h2>
-          <p class="product__price">£250</p>
+          <h2 class="product__name">{{ product.currentProduct.name }}</h2>
+          <p class="product__price">£ {{ product.currentProduct.price }}</p>
         </div>
         <div class="product__desc-box">
           <h3 class="product__desc-title">Product description</h3>
-          <p class="product__desc-text">
-            A timeless design, with premium materials features as one of our most popular and iconic
-            pieces. The dandy chair is perfect for any stylish living space with beech legs and
-            lambskin leather upholstery.
-          </p>
+          <p class="product__desc-text">{{ product.currentProduct.description }}</p>
         </div>
         <div class="product__dims">
           <h3 class="product__dims-title">Dimensions</h3>
           <ul class="product__dims-list">
             <li class="product__dims-item">
               <h4 class="product__dims-item-value">Height</h4>
-              <p class="product__dims-item-prop">110cm</p>
+              <p class="product__dims-item-prop">{{ product.currentProduct.height }}cm</p>
             </li>
             <li class="product__dims-separator"></li>
             <li class="product__dims-item">
               <h4 class="product__dims-item-value">Width</h4>
-              <p class="product__dims-item-prop">75cm</p>
+              <p class="product__dims-item-prop">{{ product.currentProduct.width }}cm</p>
             </li>
             <li class="product__dims-separator"></li>
             <li class="product__dims-item">
               <h4 class="product__dims-item-value">Depth</h4>
-              <p class="product__dims-item-prop">50cm</p>
+              <p class="product__dims-item-prop">{{ product.currentProduct.depth }}cm</p>
             </li>
           </ul>
         </div>
