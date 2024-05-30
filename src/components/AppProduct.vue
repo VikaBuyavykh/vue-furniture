@@ -32,7 +32,7 @@ onMounted(() => {
           <ul class="product__dims-list">
             <li class="product__dims-item">
               <h4 class="product__dims-item-value">Height</h4>
-              <p class="product__dims-item-prop">{{ product.currentProduct.height }}cm</p>
+              <p class="product__dims-item-prop">{{ product.currentProduct.heigth }}cm</p>
             </li>
             <li class="product__dims-separator"></li>
             <li class="product__dims-item">
