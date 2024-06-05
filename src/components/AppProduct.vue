@@ -15,6 +15,7 @@ onMounted(() => {
     <div class="product__container">
       <img
         class="product__img"
+        :class="{ product__img_horizontal: product.currentProduct.horizontal }"
         :src="product.currentProduct.img"
         :alt="product.currentProduct.alt"
       />
@@ -101,6 +102,22 @@ onMounted(() => {
 
       @include media_md {
         height: 386px;
+      }
+
+      &_horizontal {
+        height: 460px;
+
+        @include media_xl {
+          height: 380px;
+        }
+
+        @include media_sm {
+          height: 300px;
+        }
+
+        @include media_xs {
+          height: 200px;
+        }
       }
     }
 

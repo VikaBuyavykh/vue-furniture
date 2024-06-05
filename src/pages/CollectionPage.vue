@@ -1,13 +1,14 @@
 <script setup>
-import { onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
 import { usePageStore } from '@/stores/page'
+import { useProductStore } from '@/stores/products'
 import AppCard from '@/components/UI/AppCard.vue'
-import collection from '@/utils/collection'
 import AppButton from '@/components/UI/AppButton.vue'
 import filters from '@/utils/filters'
 
 const page = usePageStore()
+const product = useProductStore()
 
 const addIndex = ref(3)
 const numberOfPics = ref(3)
@@ -17,6 +18,44 @@ function loadMore() {
   numberOfPics.value = numberOfPics.value + addIndex.value
 }
 
+const allProducts = computed(() => {
+  const arr = product.products
+  let x = 0
+  const newArr = []
+  arr.forEach((item) => {
+    if (item.horizontal) {
+      newArr.push({ id: item.id, startingCellNumber: x + 1, horizontal: true })
+      x += 2
+    } else {
+      newArr.push({ id: item.id, startingCellNumber: x + 1 })
+      x++
+    }
+  })
+  newArr
+    .filter((item) => item.startingCellNumber % 3 === 0 && item.horizontal)
+    .forEach((item) => {
+      const elem = arr.find((el) => el.id === item.id)
+      const index = arr.indexOf(elem)
+      arr.splice(index, 1)
+      arr.splice(index - 1, 0, elem)
+    })
+  return arr
+})
+
+const productsToShow = computed(() => {
+  let num = numberOfPics.value
+  return allProducts.value.filter((item, index) => {
+    if (item.horizontal) {
+      num--
+    }
+    if (index < num) {
+      return item
+    }
+  })
+})
+
+const isBtnDisabled = computed(() => productsToShow.value.length === allProducts.value.length)
+
 watch(isScreenXl, () => {
   isScreenXl.value ? (addIndex.value = 3) : (addIndex.value = 2)
   const x = numberOfPics.value - (numberOfPics.value % addIndex.value)
@@ -25,7 +64,7 @@ watch(isScreenXl, () => {
 
 onMounted(() => {
   page.isCollectionPage = true
-  isScreenXl.value ? (numberOfPics.value = 3) : (numberOfPics.value = 2)
+  isScreenXl.value ? (numberOfPics.value = 9) : (numberOfPics.value = 6)
   isScreenXl.value ? (addIndex.value = 3) : (addIndex.value = 2)
 })
 
@@ -76,8 +115,9 @@ onUnmounted(() => {
       <div class="collection__list-box">
         <ul class="collection__list">
           <app-card
-            v-for="item in collection.filter((item, index) => index < numberOfPics)"
-            :key="item.img"
+            v-for="item in productsToShow"
+            :key="item.id"
+            :id="item.id"
             :img="item.img"
             :alt="item.alt"
             :name="item.name"
@@ -86,7 +126,9 @@ onUnmounted(() => {
             place="collection"
           ></app-card>
         </ul>
-        <app-button @click="loadMore" class="collection__btn">Load more</app-button>
+        <app-button v-if="!isBtnDisabled" @click="loadMore" class="collection__btn"
+          >Load more</app-button
+        >
       </div>
     </section>
   </main>
@@ -236,6 +278,7 @@ onUnmounted(() => {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(auto-fit, 1fr);
+        grid-auto-flow: dense;
         gap: 2.25rem 1.25rem;
 
         @include media_xl {
