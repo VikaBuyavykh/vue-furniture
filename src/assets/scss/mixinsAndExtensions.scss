@@ -82,3 +82,11 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
+
+%disabledBtn {
+  background-color: $medium-blue;
+  transform: none;
+  box-shadow: none;
+  cursor: default;
+  opacity: 0.5;
+}

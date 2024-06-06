@@ -1,58 +1,70 @@
 <script setup>
+import { computed } from 'vue'
+import { storeToRefs } from 'pinia'
 import { useProductStore } from '@/stores/products'
 import AppButton from '@/components/UI/AppButton.vue'
 import AppAmountInput from '@/components/UI/AppAmountInput.vue'
-import { onMounted } from 'vue'
 
 const product = useProductStore()
-onMounted(() => {
-  console.log(product.currentProduct)
+const { currentProductId, currentProduct, initialAmount } = storeToRefs(product)
+
+const isProdAdded = computed(() => {
+  return product.basket.find((item) => item.id === Number(currentProductId.value))
 })
+
+function addToCart() {
+  product.basket.push({ ...currentProduct.value, amount: initialAmount.value })
+}
 </script>
 
 <template>
-  <section v-if="product.currentProduct" class="product">
+  <section v-if="currentProduct" class="product">
     <div class="product__container">
       <img
         class="product__img"
-        :class="{ product__img_horizontal: product.currentProduct.horizontal }"
-        :src="product.currentProduct.img"
-        :alt="product.currentProduct.alt"
+        :class="{ product__img_horizontal: currentProduct.horizontal }"
+        :src="currentProduct.img"
+        :alt="currentProduct.alt"
       />
       <div class="product__info">
         <div class="product__name-box">
-          <h2 class="product__name">{{ product.currentProduct.name }}</h2>
-          <p class="product__price">£ {{ product.currentProduct.price }}</p>
+          <h2 class="product__name">{{ currentProduct.name }}</h2>
+          <p class="product__price">£ {{ currentProduct.price }}</p>
         </div>
         <div class="product__desc-box">
           <h3 class="product__desc-title">Product description</h3>
-          <p class="product__desc-text">{{ product.currentProduct.description }}</p>
+          <p class="product__desc-text">{{ currentProduct.description }}</p>
         </div>
         <div class="product__dims">
           <h3 class="product__dims-title">Dimensions</h3>
           <ul class="product__dims-list">
             <li class="product__dims-item">
               <h4 class="product__dims-item-value">Height</h4>
-              <p class="product__dims-item-prop">{{ product.currentProduct.heigth }}cm</p>
+              <p class="product__dims-item-prop">{{ currentProduct.heigth }}cm</p>
             </li>
             <li class="product__dims-separator"></li>
             <li class="product__dims-item">
               <h4 class="product__dims-item-value">Width</h4>
-              <p class="product__dims-item-prop">{{ product.currentProduct.width }}cm</p>
+              <p class="product__dims-item-prop">{{ currentProduct.width }}cm</p>
             </li>
             <li class="product__dims-separator"></li>
             <li class="product__dims-item">
               <h4 class="product__dims-item-value">Depth</h4>
-              <p class="product__dims-item-prop">{{ product.currentProduct.depth }}cm</p>
+              <p class="product__dims-item-prop">{{ currentProduct.depth }}cm</p>
             </li>
           </ul>
         </div>
         <div class="product__amount-box">
           <h3 class="product__amount-box-label">Quantitity</h3>
-          <app-amount-input></app-amount-input>
+          <app-amount-input :disabled="isProdAdded"></app-amount-input>
         </div>
+        <span class="product__added-text" v-if="isProdAdded"
+          >The product is already in the cart</span
+        >
         <div class="product__btns">
-          <app-button>Add to cart</app-button>
+          <app-button :disabled="isProdAdded || initialAmount === 0" @click="addToCart"
+            >Add to cart</app-button
+          >
           <app-button>Save to favorites</app-button>
         </div>
       </div>
@@ -274,6 +286,11 @@ onMounted(() => {
         }
       }
 
+      .product__added-text {
+        @extend %body-small;
+        color: coral;
+      }
+
       .product__btns {
         @include flex(row, start, center, 1rem);
 
@@ -296,6 +313,10 @@ onMounted(() => {
 
             &:hover {
               background-color: rgba($medium-blue, 0.8);
+            }
+
+            &:disabled {
+              @extend %disabledBtn;
             }
           }
 

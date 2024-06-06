@@ -1,14 +1,16 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
 import axios from 'axios'
 import { usePopupStore } from '@/stores/popup'
 import { useProductStore } from '@/stores/products'
 import AppHeader from '@/components/AppHeader.vue'
 import AppFooter from '@/components/AppFooter.vue'
 import AppPopup from '@/components/AppPopup.vue'
+import { storeToRefs } from 'pinia'
 
 const popup = usePopupStore()
 const product = useProductStore()
+const { currentProductId, initialAmount } = storeToRefs(product)
 
 async function getProducts() {
   try {
@@ -18,6 +20,10 @@ async function getProducts() {
     console.log(error)
   }
 }
+
+watch(currentProductId, () => {
+  initialAmount.value = 1
+})
 
 onMounted(() => {
   getProducts()

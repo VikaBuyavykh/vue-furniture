@@ -1,14 +1,65 @@
 <script setup>
-defineProps({
-  place: String
+import { useProductStore } from '@/stores/products'
+import { storeToRefs } from 'pinia'
+import { computed, watch } from 'vue'
+
+const props = defineProps({
+  place: [String, undefined],
+  id: [Number, undefined],
+  disabled: [Object, undefined]
 })
+
+const product = useProductStore()
+const { basket } = storeToRefs(product)
+
+const isMinusDisabled = computed(() => {
+  if (props.place === 'basket') {
+    return basket.value.find((item) => item.id === props.id).amount === 0
+  } else {
+    return product.initialAmount === 0
+  }
+})
+
+function addAmount() {
+  if (props.place === 'basket') {
+    basket.value.find((item) => item.id === props.id).amount++
+  } else {
+    product.initialAmount++
+  }
+}
+
+function reduceAmount() {
+  if (props.place === 'basket') {
+    basket.value.find((item) => item.id === props.id).amount--
+  } else {
+    product.initialAmount--
+  }
+}
+
+watch(
+  basket,
+  () => {
+    const elemToDelete = basket.value.find((item) => item.amount === 0)
+    if (elemToDelete) {
+      basket.value.splice(basket.value.indexOf(elemToDelete), 1)
+    }
+  },
+  { deep: true }
+)
 </script>
 
 <template>
-  <div class="amount-input-box" :class="{ 'amount-input-box_basket': place === 'basket' }">
-    <button type="button">-</button>
-    <input type="number" name="amout" id="amount" value="1" />
-    <button type="button">+</button>
+  <div class="amount-input-box" :class="{ 'amount-input-box_basket': props.place === 'basket' }">
+    <button :disabled="isMinusDisabled || disabled" type="button" @click="reduceAmount">-</button>
+    <input
+      v-if="props.place === 'basket'"
+      type="number"
+      name="amout"
+      id="amount"
+      v-model="basket.find((item) => item.id === props.id).amount"
+    />
+    <input v-else type="number" name="amout" id="amount" v-model="product.initialAmount" />
+    <button :disabled="disabled" type="button" @click="addAmount">+</button>
   </div>
 </template>
 

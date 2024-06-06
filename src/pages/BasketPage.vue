@@ -1,11 +1,19 @@
 <script setup>
-import { onMounted, onUnmounted } from 'vue'
+import { computed, onMounted, onUnmounted } from 'vue'
+import { storeToRefs } from 'pinia'
 import { usePageStore } from '@/stores/page'
+import { useProductStore } from '@/stores/products'
 import AppAmountInput from '@/components/UI/AppAmountInput.vue'
 import AppButton from '@/components/UI/AppButton.vue'
-import basket from '@/utils/basket'
 
 const page = usePageStore()
+const product = useProductStore()
+const { basket } = storeToRefs(product)
+const subtotal = computed(() => {
+  return basket.value.reduce((sum, item) => {
+    return sum + item.amount * item.price
+  }, 0)
+})
 
 onMounted(() => {
   page.isBasketPage = true
@@ -25,24 +33,31 @@ onUnmounted(() => {
         <p class="basket__header-point">Quantity</p>
         <p class="basket__header-point">Total</p>
       </div>
-      <ul class="basket__main">
-        <li v-for="item in basket" :key="item.name" class="basket__product">
+      <ul v-if="basket.length > 0" class="basket__main">
+        <li v-for="item in basket" :key="item.id" class="basket__product">
           <img class="basket__product-img" :src="item.img" :alt="item.alt" />
           <div class="basket__product-about-box">
             <h4 class="basket__product-name">{{ item.name }}</h4>
             <p class="basket__product-desc">{{ item.desc }}</p>
-            <p class="basket__product-price">{{ item.price }}</p>
+            <p class="basket__product-price">£{{ item.price }}</p>
           </div>
-          <app-amount-input class="basket__product-amount" place="basket"></app-amount-input>
-          <p class="basket__product-total">£85</p>
+          <app-amount-input
+            class="basket__product-amount"
+            place="basket"
+            :id="item.id"
+          ></app-amount-input>
+          <p class="basket__product-total">
+            £{{ item.price * basket.find((prod) => prod.id === item.id).amount }}
+          </p>
         </li>
       </ul>
+      <p v-else class="basket__no-prod-text">The cart is currently empty</p>
       <div class="basket__footer">
         <div class="basket__sum-box">
           <p class="basket__taxes-text">Taxes and shipping are calculated at checkout</p>
-          <p class="basket__sum"><span>Subtotal</span>£210</p>
+          <p class="basket__sum"><span>Subtotal</span>£{{ subtotal }}</p>
         </div>
-        <app-button class="basket__btn">Go to checkout</app-button>
+        <app-button :disabled="basket.length === 0" class="basket__btn">Go to checkout</app-button>
       </div>
     </div>
   </main>
@@ -115,6 +130,10 @@ onUnmounted(() => {
       @include flex(column, start, stretch, 2rem);
       list-style-type: none;
       overflow-x: scroll;
+
+      &::-webkit-scrollbar {
+        height: 0;
+      }
 
       @include media_lg {
         padding-block: 2rem 2.25rem;
@@ -199,6 +218,12 @@ onUnmounted(() => {
       }
     }
 
+    .basket__no-prod-text {
+      padding-block: 1.75rem;
+      @extend %body-small;
+      text-align: center;
+    }
+
     .basket__footer {
       @include size(100%, auto);
       padding-top: 1.25rem;
@@ -244,6 +269,10 @@ onUnmounted(() => {
 
         &:hover {
           background-color: rgba($medium-blue, 0.8);
+        }
+
+        &:disabled {
+          @extend %disabledBtn;
         }
 
         @include media_xs {
