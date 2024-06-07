@@ -5,10 +5,12 @@ import { usePageStore } from '@/stores/page'
 import { useProductStore } from '@/stores/products'
 import AppCard from '@/components/UI/AppCard.vue'
 import AppButton from '@/components/UI/AppButton.vue'
+import { storeToRefs } from 'pinia'
 import filters from '@/utils/filters'
 
 const page = usePageStore()
 const product = useProductStore()
+const { priceFilterValue, designerFilterValue, typeFilterValue, products } = storeToRefs(product)
 
 const addIndex = ref(3)
 const numberOfPics = ref(3)
@@ -18,8 +20,26 @@ function loadMore() {
   numberOfPics.value = numberOfPics.value + addIndex.value
 }
 
+function priceFilter(arr) {
+  if (priceFilterValue.value === '') {
+    return arr
+  } else {
+    if (priceFilterValue.value === '0 - 100') {
+      return arr.filter((item) => item.price >= 0 && item.price <= 100)
+    } else if (priceFilterValue.value === '101 - 250') {
+      return arr.filter((item) => item.price >= 101 && item.price <= 250)
+    } else {
+      return arr.filter((item) => item.price > 250)
+    }
+  }
+}
+
+const collection = computed(() => {
+  return priceFilter(products.value)
+})
+
 const allProducts = computed(() => {
-  const arr = product.products
+  const arr = collection.value
   let x = 0
   const newArr = []
   arr.forEach((item) => {
@@ -80,18 +100,51 @@ onUnmounted(() => {
     </section>
     <section class="collection__content">
       <form class="collection__filters">
-        <fieldset v-for="filter in filters" :key="filter.filter" class="collection__filter">
-          <h5 class="collection__filter-title">{{ filter.filter }}</h5>
+        <fieldset class="collection__filter">
+          <h5 class="collection__filter-title">{{ filters[0].title }}</h5>
           <div class="collection__filter-box">
-            <label v-for="value in filter.values" :key="value" class="collection__label">
+            <label v-for="item in filters[0].values" :key="item" class="collection__label">
               <input
                 class="visually-hidden"
-                :type="filter.type"
-                :name="filter.name"
-                :value="value"
+                :type="filters[0].type"
+                :name="filters[0].name"
+                :value="item"
+                v-model="typeFilterValue"
               />
               <span></span>
-              {{ value }}
+              {{ item }}
+            </label>
+          </div>
+        </fieldset>
+        <fieldset class="collection__filter">
+          <h5 class="collection__filter-title">{{ filters[1].title }}</h5>
+          <div class="collection__filter-box">
+            <label v-for="item in filters[1].values" :key="item" class="collection__label">
+              <input
+                class="visually-hidden"
+                :type="filters[1].type"
+                :name="filters[1].name"
+                :value="item"
+                v-model="priceFilterValue"
+              />
+              <span></span>
+              {{ item }}
+            </label>
+          </div>
+        </fieldset>
+        <fieldset class="collection__filter">
+          <h5 class="collection__filter-title">{{ filters[2].title }}</h5>
+          <div class="collection__filter-box">
+            <label v-for="item in filters[2].values" :key="item" class="collection__label">
+              <input
+                class="visually-hidden"
+                :type="filters[2].type"
+                :name="filters[2].name"
+                :value="item"
+                v-model="designerFilterValue"
+              />
+              <span></span>
+              {{ item }}
             </label>
           </div>
         </fieldset>
@@ -105,7 +158,7 @@ onUnmounted(() => {
           <option value="d">d</option>
         </select>
         <select class="collection__select" name="sorting" id="sorting">
-          <option value="">Sorting &#9207;</option>
+          <option disabled value="">Sorting &#9207;</option>
           <option value="k">k</option>
           <option value="l">l</option>
           <option value="m">m</option>
