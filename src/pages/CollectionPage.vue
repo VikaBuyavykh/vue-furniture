@@ -20,6 +20,22 @@ function loadMore() {
   numberOfPics.value = numberOfPics.value + addIndex.value
 }
 
+function resetPrice(e) {
+  if (e.currentTarget.value === priceFilterValue.value) {
+    priceFilterValue.value = ''
+  }
+}
+
+function typeFilter(arr) {
+  if (typeFilterValue.value.length === 0) {
+    return arr
+  } else {
+    return arr.filter((item) =>
+      item.types.find((item) => typeFilterValue.value.find((type) => type === item))
+    )
+  }
+}
+
 function priceFilter(arr) {
   if (priceFilterValue.value === '') {
     return arr
@@ -34,8 +50,16 @@ function priceFilter(arr) {
   }
 }
 
+function designerFilter(arr) {
+  if (designerFilterValue.value.length === 0) {
+    return arr
+  } else {
+    return arr.filter((item) => designerFilterValue.value.find((des) => des === item.designer))
+  }
+}
+
 const collection = computed(() => {
-  return priceFilter(products.value)
+  return typeFilter(designerFilter(priceFilter(products.value)))
 })
 
 const allProducts = computed(() => {
@@ -121,6 +145,7 @@ onUnmounted(() => {
           <div class="collection__filter-box">
             <label v-for="item in filters[1].values" :key="item" class="collection__label">
               <input
+                @click="resetPrice"
                 class="visually-hidden"
                 :type="filters[1].type"
                 :name="filters[1].name"
@@ -166,7 +191,7 @@ onUnmounted(() => {
         </select>
       </form>
       <div class="collection__list-box">
-        <ul class="collection__list">
+        <transition-group name="flip-list" tag="ul" class="collection__list" v-bind:css="false">
           <app-card
             v-for="item in productsToShow"
             :key="item.id"
@@ -178,7 +203,7 @@ onUnmounted(() => {
             :horizontal="item.horizontal"
             place="collection"
           ></app-card>
-        </ul>
+        </transition-group>
         <app-button v-if="!isBtnDisabled" @click="loadMore" class="collection__btn"
           >Load more</app-button
         >
@@ -191,6 +216,10 @@ onUnmounted(() => {
 @import '@/assets/scss/variables.scss';
 @import '@/assets/scss/fonts.scss';
 @import '@/assets/scss/mixinsAndExtensions.scss';
+
+.flip-list-move {
+  transition: transform 1s ease;
+}
 
 .visually-hidden {
   clip: rect(0 0 0 0);
