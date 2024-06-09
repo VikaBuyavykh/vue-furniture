@@ -12,6 +12,7 @@ export const useProductStore = defineStore('product', () => {
   const priceFilterValue = ref('')
   const designerFilterValue = ref([])
   const typeFilterValue = ref([])
+  const sortingValue = ref('')
 
   return {
     products,
@@ -21,6 +22,7 @@ export const useProductStore = defineStore('product', () => {
     initialAmount,
     priceFilterValue,
     designerFilterValue,
-    typeFilterValue
+    typeFilterValue,
+    sortingValue
   }
 })

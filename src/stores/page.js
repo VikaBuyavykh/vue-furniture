@@ -21,6 +21,8 @@ export const usePageStore = defineStore('page', () => {
     () => isCollectionPage.value && isSmallScreen.value
   )
 
+  const isFiltersPopupVisible = ref(false)
+
   return {
     isMainPage,
     isMainPageSmallScreenSized,
@@ -30,6 +32,7 @@ export const usePageStore = defineStore('page', () => {
     isBasketPage,
     isBasketPageSmallScreenSized,
     isCollectionPage,
-    isCollectionPageSmallScreenSized
+    isCollectionPageSmallScreenSized,
+    isFiltersPopupVisible
   }
 })
