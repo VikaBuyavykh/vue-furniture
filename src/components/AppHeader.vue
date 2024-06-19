@@ -3,19 +3,32 @@ import { usePageStore } from '@/stores/page'
 import { useHoverStore } from '@/stores/hover'
 import { usePopupStore } from '@/stores/popup'
 import { useFormStore } from '@/stores/form'
+import { useProductStore } from '@/stores/products'
 import router from '@/router'
 import navLinks from '@/utils/navLinks'
+import { storeToRefs } from 'pinia'
 
 const page = usePageStore()
 const hover = useHoverStore()
 const popup = usePopupStore()
 const form = useFormStore()
+const product = useProductStore()
+const { currentSection, searchQueryRequest } = storeToRefs(product)
 
 function search() {
   router.push('/collection')
   setTimeout(() => {
     document.querySelector('#search').focus()
   }, 0)
+}
+
+function clickSection(section) {
+  currentSection.value = section
+}
+
+function searchSbmt() {
+  searchQueryRequest.value = form.searchQuery.toLowerCase()
+  router.push('/collection')
 }
 </script>
 
@@ -25,7 +38,8 @@ function search() {
       class="header__row"
       :class="{ header__row_about: page.isAboutPage, header__row_listing: page.isListingPage }"
     >
-      <div
+      <form
+        @submit.prevent="searchSbmt"
         class="header__input-box"
         v-if="
           !page.isAboutPage &&
@@ -41,6 +55,7 @@ function search() {
           class="header__input-btn"
           :src="hover.isLoupeHovered ? '/search-active.svg' : '/search.svg'"
           alt="Icon of search-button"
+          @click="searchSbmt"
         />
         <input
           v-model="form.searchQuery"
@@ -49,7 +64,7 @@ function search() {
           name="search"
           id="search"
         />
-      </div>
+      </form>
       <h1
         @click="() => router.push('/')"
         class="header__name"
@@ -68,7 +83,12 @@ function search() {
         class="header__nav-list"
         :class="{ 'header__nav-list_listing': page.isListingPage }"
       >
-        <li v-for="link in navLinks" :key="link.name" class="header__nav-list-item">
+        <li
+          v-for="link in navLinks"
+          :key="link.name"
+          class="header__nav-list-item"
+          @click="clickSection(link.name)"
+        >
           <router-link class="header__nav-list-link" :to="link.link">{{ link.name }}</router-link>
         </li>
       </ul>
@@ -84,8 +104,9 @@ function search() {
             page.isBasketPageSmallScreenSized || page.isCollectionPageSmallScreenSized
         }"
       >
-        <div
+        <form
           class="header__input-box header__input-box_listing"
+          @submit.prevent="searchSbmt"
           v-if="
             page.isListingPage ||
             page.isMainPageSmallScreenSized ||
@@ -96,6 +117,7 @@ function search() {
           <img
             @mouseenter="() => (hover.isLoupeHovered = true)"
             @mouseleave="() => (hover.isLoupeHovered = false)"
+            @click="searchSbmt"
             class="header__input-btn"
             :src="hover.isLoupeHovered ? '/search-active.svg' : '/search.svg'"
             alt="Icon of search-button"
@@ -107,7 +129,7 @@ function search() {
             name="search"
             id="search"
           />
-        </div>
+        </form>
         <nav class="header__sections-menu" v-if="page.isAboutPage">
           <router-link class="header__menu-item" to="#">About us</router-link>
           <router-link class="header__menu-item" to="#">Contact</router-link>
@@ -192,11 +214,30 @@ function search() {
       :class="{ header__nav_about: page.isAboutPage }"
     >
       <ul class="header__nav-list">
-        <li v-if="page.isAboutPage" key="All products" class="header__nav-list-item">
+        <li
+          v-if="page.isAboutPage"
+          key="All products"
+          class="header__nav-list-item"
+          @click="
+            () => {
+              currentSection = 'all'
+            }
+          "
+        >
           <router-link class="header__nav-list-link" to="/collection">All products</router-link>
         </li>
-        <li v-for="link in navLinks" :key="link.name" class="header__nav-list-item">
-          <router-link class="header__nav-list-link" :to="link.link">{{ link.name }}</router-link>
+        <li
+          v-for="link in navLinks"
+          :key="link.name"
+          class="header__nav-list-item"
+          @click="clickSection(link.name)"
+        >
+          <router-link
+            class="header__nav-list-link"
+            :class="{ 'header__nav-list-link_active': currentSection === link.name }"
+            :to="link.link"
+            >{{ link.name }}</router-link
+          >
         </li>
       </ul>
     </nav>
@@ -393,6 +434,10 @@ function search() {
           &:hover {
             text-decoration: underline;
             opacity: 0.7;
+          }
+
+          &_active {
+            color: coral;
           }
         }
       }

@@ -3,6 +3,7 @@ import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
 import { usePageStore } from '@/stores/page'
 import { useProductStore } from '@/stores/products'
+import { useFormStore } from '@/stores/form'
 import AppFilters from '@/components/AppFilters.vue'
 import AppCard from '@/components/UI/AppCard.vue'
 import AppButton from '@/components/UI/AppButton.vue'
@@ -10,13 +11,26 @@ import { storeToRefs } from 'pinia'
 
 const page = usePageStore()
 const product = useProductStore()
-const { priceFilterValue, designerFilterValue, typeFilterValue, products, sortingValue } =
-  storeToRefs(product)
+const form = useFormStore()
+const { searchQuery } = storeToRefs(form)
+const {
+  priceFilterValue,
+  designerFilterValue,
+  typeFilterValue,
+  products,
+  sortingValue,
+  currentSection,
+  searchQueryRequest
+} = storeToRefs(product)
 const { isFiltersPopupVisible } = storeToRefs(page)
 
 const addIndex = ref(3)
 const numberOfPics = ref(3)
 const isScreenXl = useMediaQuery('(min-width: 1201px)')
+
+function showAllProducts() {
+  currentSection.value = 'all'
+}
 
 function loadMore() {
   numberOfPics.value = numberOfPics.value + addIndex.value
@@ -38,6 +52,22 @@ function sort(arr) {
   } else {
     return arr
   }
+}
+
+function sectionFilter(arr) {
+  if (currentSection.value === 'all') {
+    return arr
+  } else {
+    return arr.filter((item) => item.group === currentSection.value)
+  }
+}
+
+function searchQueryFilter(arr) {
+  return arr.filter(
+    (item) =>
+      item.name.toLowerCase().includes(searchQueryRequest.value) ||
+      item.description.toLowerCase().includes(searchQueryRequest.value)
+  )
 }
 
 function typeFilter(arr) {
@@ -72,8 +102,10 @@ function designerFilter(arr) {
   }
 }
 
+const sectionProducts = computed(() => sectionFilter(products.value))
+
 const collection = computed(() => {
-  return sort(typeFilter(designerFilter(priceFilter(products.value))))
+  return sort(typeFilter(designerFilter(priceFilter(searchQueryFilter(sectionProducts.value)))))
 })
 
 const allProducts = computed(() => {
@@ -128,13 +160,16 @@ onMounted(() => {
 
 onUnmounted(() => {
   page.isCollectionPage = false
+  currentSection.value = 'all'
+  searchQuery.value = ''
+  searchQueryRequest.value = ''
 })
 </script>
 
 <template>
   <main class="collection" @click="closePopup">
     <section class="collection__cover">
-      <h2 @click="() => sort(collection)" class="collection__cover-title">All products</h2>
+      <h2 @click="showAllProducts" class="collection__cover-title">All products</h2>
     </section>
     <section class="collection__content">
       <app-filters :main="true"></app-filters>
@@ -152,6 +187,16 @@ onUnmounted(() => {
         </select>
       </form>
       <div class="collection__list-box">
+        <p class="collection__no-prod-text" v-if="sectionProducts.length === 0 && currentSection">
+          There is no products in this section. Choose another one or click "All products" to see
+          the whole collection
+        </p>
+        <p
+          class="collection__no-prod-text"
+          v-if="productsToShow.length === 0 && sectionProducts.length !== 0"
+        >
+          There is no products matching your request. You might change the request parameters
+        </p>
         <transition-group name="flip-list" tag="ul" class="collection__list" v-bind:css="false">
           <app-card
             v-for="item in productsToShow"
@@ -201,6 +246,13 @@ onUnmounted(() => {
     &-title {
       @extend %sizing;
       @extend %h1;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        color: $violet;
+      }
 
       @include media_md {
         text-align: center;
@@ -269,6 +321,11 @@ onUnmounted(() => {
 
       @include media_md {
         gap: 2.75rem;
+      }
+
+      .collection__no-prod-text {
+        @extend %body-small;
+        text-align: center;
       }
 
       .collection__list {

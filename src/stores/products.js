@@ -13,6 +13,8 @@ export const useProductStore = defineStore('product', () => {
   const designerFilterValue = ref([])
   const typeFilterValue = ref([])
   const sortingValue = ref('')
+  const currentSection = ref('all')
+  const searchQueryRequest = ref('')
 
   return {
     products,
@@ -23,6 +25,8 @@ export const useProductStore = defineStore('product', () => {
     priceFilterValue,
     designerFilterValue,
     typeFilterValue,
-    sortingValue
+    sortingValue,
+    currentSection,
+    searchQueryRequest
   }
 })
