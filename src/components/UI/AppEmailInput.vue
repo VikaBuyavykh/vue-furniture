@@ -1,11 +1,56 @@
 <script setup>
-defineProps({
-  theme: String
+import { useFormStore } from '@/stores/form'
+import axios from 'axios'
+import { storeToRefs } from 'pinia'
+
+const props = defineProps({
+  theme: String,
+  invitation: Boolean
 })
+
+const form = useFormStore()
+const { clubListEmail, mailingEmail, errorText } = storeToRefs(form)
+
+function onInput(e) {
+  errorText.value = ''
+  if (props.invitation) {
+    clubListEmail.value = e.target.value
+  } else {
+    mailingEmail.value = e.target.value
+  }
+}
+
+async function sbmt() {
+  try {
+    let path
+    let value
+    let error
+    if (props.invitation) {
+      path = 'clubList'
+      value = clubListEmail.value
+      error = 'This email is already in the club list'
+    } else {
+      path = 'mailingList'
+      value = mailingEmail.value
+      error = 'This email is already in mailing list'
+    }
+    const { data } = await axios.get(`https://e7067c4f8e5566a0.mokky.dev/${path}`)
+    if (data.map((item) => item.email).includes(value)) {
+      errorText.value = error
+      throw new Error(error)
+    } else {
+      await axios.post(`https://e7067c4f8e5566a0.mokky.dev/${path}`, {
+        email: value
+      })
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
 </script>
 
 <template>
-  <form class="email-form">
+  <form @submit.prevent="sbmt" class="email-form">
     <input
       class="email-input"
       :class="{ 'email-input_dark': theme === 'dark' }"
@@ -13,6 +58,8 @@ defineProps({
       name="email"
       id="email"
       placeholder="your@email.com"
+      :value="invitation ? clubListEmail : mailingEmail"
+      @input="onInput"
     />
     <button class="email-btn" :class="{ 'email-btn_dark': theme === 'dark' }" type="submit">
       Sign up

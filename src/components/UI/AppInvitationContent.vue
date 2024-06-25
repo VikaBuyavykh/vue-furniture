@@ -1,8 +1,14 @@
 <script setup>
+import { useFormStore } from '@/stores/form'
 import AppEmailInput from '@/components/UI/AppEmailInput.vue'
+import { storeToRefs } from 'pinia'
+
 defineProps({
   listing: Boolean
 })
+
+const form = useFormStore()
+const { errorText } = storeToRefs(form)
 </script>
 
 <template>
@@ -15,7 +21,8 @@ defineProps({
       and more
     </p>
     <slot></slot>
-    <app-email-input :class="{ 'invitation-content__input': listing }"></app-email-input>
+    <app-email-input :class="{ 'invitation-content__input': listing }" invitation></app-email-input>
+    <span class="invitation-content__error">{{ errorText }}</span>
   </div>
 </template>
 
@@ -111,6 +118,14 @@ defineProps({
     @include media_xl {
       width: 100%;
     }
+  }
+
+  .invitation-content__error {
+    @extend %body-small;
+    text-align: left;
+    color: red;
+    margin-top: 0.25rem;
+    height: 1.25rem;
   }
 }
 </style>

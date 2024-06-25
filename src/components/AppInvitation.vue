@@ -23,7 +23,7 @@ import benefits from '@/utils/benefits'
 
 .invitation {
   @include size(100%, auto);
-  padding-block: 97px 86px;
+  padding-block: 97px 3.8125rem;
   background-image: url('@/images/invitation.jpg');
   @extend %bgi;
 
