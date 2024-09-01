@@ -59,7 +59,8 @@ const closeIcon = computed(() => {
   &--item {
     @include size(100%, auto);
 
-    &-normal {
+    &-normal,
+    .selects--button {
       cursor: pointer;
       @extend %hoverShadow;
       @include medium($dark-primary, center);
@@ -72,17 +73,9 @@ const closeIcon = computed(() => {
       background-color: $light-gray;
     }
 
-    .selects--button {
-      cursor: pointer;
-      @extend %hoverShadow;
-      @include medium($dark-primary, center);
-      @include size(100%, auto);
-      @extend %resetInputsAndBtns;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      padding-block: 16px;
-      background-color: $light-gray;
+    &-nomal {
+      text-align: center !important;
+      color: $dark-primary !important;
     }
 
     &-wrapper {

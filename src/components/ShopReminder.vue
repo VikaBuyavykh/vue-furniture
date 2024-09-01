@@ -55,7 +55,7 @@ function closeReminder() {
   }
 
   &--close {
-    color: $white;
+    color: white !important;
     @include size(16px, 16px);
     position: absolute;
     right: 10px;
