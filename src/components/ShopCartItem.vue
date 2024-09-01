@@ -54,8 +54,12 @@ const bigImgPath = computed(
   }
 
   &--image {
-    @include size(100%, -webkit-fill-available);
+    @include size(100%, 100%);
     position: relative;
+
+    @include media_md {
+      height: 166px;
+    }
 
     img {
       position: absolute;
