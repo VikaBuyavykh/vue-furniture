@@ -18,12 +18,8 @@ const closeIcon = computed(() => {
 
 <template>
   <form class="selects">
-    <div class="selects--button-wrapper">
-      <button
-        @click.stop="$emit('toggleSelectsPopup')"
-        class="selects--item selects--button"
-        type="button"
-      >
+    <div class="selects--item-wrapper">
+      <button @click.stop="$emit('toggleSelectsPopup')" class="selects--item" type="button">
         Filters &#9207;
       </button>
       <Transition name="fade">
@@ -41,11 +37,13 @@ const closeIcon = computed(() => {
         </div>
       </Transition>
     </div>
-    <select class="selects--item selects--item-normal" v-model="sortingValue">
-      <option value="initial">Sorting &#9207;</option>
-      <option value="higher">To hign price</option>
-      <option value="lower">To low price</option>
-    </select>
+    <div class="selects--item-wrapper">
+      <select class="selects--item selects--item-normal" v-model="sortingValue">
+        <option value="initial">Sorting &#9207;</option>
+        <option value="higher">To hign price</option>
+        <option value="lower">To low price</option>
+      </select>
+    </div>
   </form>
 </template>
 
@@ -60,15 +58,15 @@ const closeIcon = computed(() => {
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
 
-  &--button-wrapper {
+  &--item-wrapper {
     @include size(100%, auto);
     position: relative;
+    @include flex(row, center, center, 0);
+    background-color: $light-gray;
+    padding-block: 16px;
   }
 
   &--item {
-    @include size(100%, auto);
-    padding-block: 16px;
-    background-color: $light-gray;
     cursor: pointer;
     @extend %resetInputsAndBtns;
     @include medium($dark-primary, center);
