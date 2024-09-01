@@ -8,7 +8,7 @@ function closeReminder() {
 }
 
 const closeIcon = computed(() => {
-  return new URL(`/src/images/icons/login.svg#svg`, import.meta.url).href
+  return new URL(`/src/images/icons/close.svg#svg`, import.meta.url).href
 })
 </script>
 
