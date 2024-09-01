@@ -59,7 +59,7 @@ const closeIcon = computed(() => {
   }
 
   &--close {
-    color: white !important;
+    color: $white;
     @include size(16px, 16px);
     position: absolute;
     right: 10px;

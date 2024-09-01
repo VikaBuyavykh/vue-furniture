@@ -18,8 +18,12 @@ const closeIcon = computed(() => {
 
 <template>
   <form class="selects">
-    <div class="selects--item selects--item-wrapper">
-      <button @click.stop="$emit('toggleSelectsPopup')" class="selects--button" type="button">
+    <div class="selects--button-wrapper">
+      <button
+        @click.stop="$emit('toggleSelectsPopup')"
+        class="selects--item selects--button"
+        type="button"
+      >
         Filters &#9207;
       </button>
       <Transition name="fade">
@@ -56,30 +60,27 @@ const closeIcon = computed(() => {
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
 
+  &--button-wrapper {
+    @include size(100%, auto);
+    position: relative;
+  }
+
   &--item {
     @include size(100%, auto);
+    padding-block: 16px;
+    background-color: $light-gray;
+    cursor: pointer;
+    @extend %resetInputsAndBtns;
+    @include medium($dark-primary, center);
 
-    &-normal,
-    .selects--button {
-      cursor: pointer;
-      @extend %hoverShadow;
-      @include medium($dark-primary, center);
-      @include size(100%, auto);
-      @extend %resetInputsAndBtns;
+    &-normal {
       -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;
-      padding-block: 16px;
-      background-color: $light-gray;
 
       option {
         text-align: center;
-        color: $dark-primary;
       }
-    }
-
-    &-wrapper {
-      position: relative;
     }
   }
 
