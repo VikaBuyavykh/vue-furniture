@@ -55,6 +55,7 @@ const subs = defineModel('subs')
     @extend %resetInputsAndBtns;
     min-width: 100px;
     padding-inline: 32px;
+    border-radius: 0;
     @include medium($dark-primary, left);
     background-color: $light-gray;
 
