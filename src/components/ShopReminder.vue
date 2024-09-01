@@ -20,7 +20,7 @@ function closeReminder() {
         viewBox="0 0 32 32"
         fill="none"
       >
-        <use href="@/images/icons/close.svg#svg" />
+        <use href="/src/images/icons/close.svg#svg" />
       </svg>
     </section>
   </Transition>
