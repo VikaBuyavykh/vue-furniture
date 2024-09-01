@@ -46,7 +46,7 @@ const bigImgPath = computed(
 .cart-item {
   @include size(100%, auto);
   display: grid;
-  grid-template-columns: 109px auto;
+  grid-template: 1fr / 109px auto;
   gap: 21px;
 
   @include media_md {
