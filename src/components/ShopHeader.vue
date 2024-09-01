@@ -118,7 +118,7 @@ const loginIcon = computed(() => {
         >
           <use :href="menuIcon" />
         </svg>
-        <RouterLink v-if="!isAuth" :to="{ name: 'login' }">
+        <RouterLink v-if="!isAuth" :to="{ name: 'login' }" class="header--icon-link">
           <svg width="16" height="16" fill="currentColor" class="header--icon" viewBox="0 0 16 16">
             <use :href="loginIcon" />
           </svg>
@@ -250,6 +250,10 @@ const loginIcon = computed(() => {
   &--submit {
     @include size(16px, 16px);
     @extend %resetInputsAndBtns;
+  }
+
+  &--icon-link {
+    @include size(16px, 16px);
   }
 
   &--icon {

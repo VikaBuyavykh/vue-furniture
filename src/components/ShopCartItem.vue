@@ -54,12 +54,12 @@ const bigImgPath = computed(
   }
 
   &--image {
-    @include size(100%, 100%);
+    @include size(100%, -webkit-fill-available);
     position: relative;
 
     img {
       position: absolute;
-      @include size(100%, 100%);
+      @include size(100%, inherit);
       @extend %pic;
     }
   }
