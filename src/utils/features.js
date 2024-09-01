@@ -1,28 +1,31 @@
-const features = [
+import deliveryIcon from '@/images/icons/delivery.svg'
+import checkmarkIcon from '@/images/icons/checkmark.svg'
+import purchaseIcon from '@/images/icons/purchase.svg'
+import sproutIcon from '@/images/icons/sprout.svg'
+
+export default [
   {
-    img: '/delivery.svg',
-    alt: 'Delivery image',
-    name: 'Next day as standard',
+    img: deliveryIcon,
+    alt: 'Delivery icon',
+    title: 'Next day as standard',
     text: 'Order before 3pm and get your order the next day as standard'
   },
   {
-    img: '/checkmark.svg',
-    alt: 'Checkmark image',
-    name: 'Made by true artisans',
+    img: checkmarkIcon,
+    alt: 'Checkmark icon',
+    title: 'Made by true artisans',
     text: 'Handmade crafted goods made with real passion and craftmanship'
   },
   {
-    img: '/purchase.svg',
-    alt: 'Purchase image',
-    name: 'Unbeatable prices',
+    img: purchaseIcon,
+    alt: 'Purchase icon',
+    title: 'Unbeatable prices',
     text: 'For our materials and quality you won’t find better prices anywhere'
   },
   {
-    img: '/sprout.svg',
-    alt: 'Sprout image',
-    name: 'Recycled packaging',
+    img: sproutIcon,
+    alt: 'Sprout icon',
+    title: 'Recycled packaging',
     text: 'We use 100% recycled to ensure our footprint is more manageable'
   }
 ]
-
-export default features

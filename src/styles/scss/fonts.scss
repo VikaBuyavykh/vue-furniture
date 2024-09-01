@@ -1,0 +1,75 @@
+@import 'mixins';
+@import 'extensions';
+@import 'variables';
+
+@font-face {
+  font-family: 'Satoshi';
+  src:
+    url('../fonts/Satoshi-Regular.woff2') format('woff2'),
+    url('../fonts/Satoshi-Regular.woff') format('woff'),
+    url('../fonts/Satoshi-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ClashDisplay';
+  src:
+    url('../fonts/ClashDisplay-Regular.woff2') format('woff2'),
+    url('../fonts/ClashDisplay-Regular.woff') format('woff'),
+    url('../fonts/ClashDisplay-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@mixin h1($color, $text-align) {
+  font-family: 'ClashDisplay', 'Arial', 'Helvetica', sans-serif;
+  @include text(36px, 50.4px, $color, $text-align);
+}
+
+@mixin h2($color, $text-align) {
+  font-family: 'ClashDisplay', 'Arial', 'Helvetica', sans-serif;
+  @include text(32px, 44.8px, $color, $text-align);
+}
+
+@mixin h3($color, $text-align) {
+  font-family: 'ClashDisplay', 'Arial', 'Helvetica', sans-serif;
+  @include text(24px, 33.6px, $color, $text-align);
+}
+
+@mixin h4($color, $text-align) {
+  font-family: 'ClashDisplay', 'Arial', 'Helvetica', sans-serif;
+  @include text(20px, 28px, $color, $text-align);
+}
+
+@mixin h5($color, $text-align) {
+  font-family: 'ClashDisplay', 'Arial', 'Helvetica', sans-serif;
+  @include text(16px, 22.4px, $color, $text-align);
+}
+
+@mixin h6($color, $text-align) {
+  font-family: 'ClashDisplay', 'Arial', 'Helvetica', sans-serif;
+  @include text(14px, 19.6px, $color, $text-align);
+}
+
+@mixin small($color, $text-align) {
+  font-family: 'Satoshi', 'Arial', 'Helvetica', sans-serif;
+  @include text(14px, 21px, $color, $text-align);
+}
+
+@mixin medium($color, $text-align) {
+  font-family: 'Satoshi', 'Arial', 'Helvetica', sans-serif;
+  @include text(16px, 24px, $color, $text-align);
+}
+
+@mixin large($color, $text-align) {
+  font-family: 'Satoshi', 'Arial', 'Helvetica', sans-serif;
+  @include text(18px, 27px, $color, $text-align);
+}
+
+@mixin x-large($color, $text-align) {
+  font-family: 'Satoshi', 'Arial', 'Helvetica', sans-serif;
+  @include text(24px, 32px, $color, $text-align);
+}

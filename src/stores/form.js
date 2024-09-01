@@ -1,11 +1,29 @@
-import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import { defineStore } from 'pinia'
 
 export const useFormStore = defineStore('form', () => {
-  const searchQuery = ref('')
-  const clubListEmail = ref('')
-  const mailingEmail = ref('')
-  const errorText = ref('')
+  const form = ref({
+    name: '',
+    email: '',
+    password: '',
+    repeatedPassword: ''
+  })
 
-  return { searchQuery, mailingEmail, clubListEmail, errorText }
+  function setFormValues(values) {
+    Object.entries(values).forEach(([key, value]) => {
+      form.value = { ...form.value, [key]: value }
+    })
+  }
+
+  function resetForm() {
+    Object.keys(form.value).forEach((key) => {
+      form.value[key] = ''
+    })
+  }
+
+  return {
+    form,
+    setFormValues,
+    resetForm
+  }
 })

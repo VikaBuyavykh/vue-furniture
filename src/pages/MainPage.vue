@@ -1,35 +1,30 @@
 <script setup>
-import { onMounted, onUnmounted } from 'vue'
-import { usePageStore } from '@/stores/page'
-import AppCover from '@/components/AppCover.vue'
-import AppFeatures from '@/components/AppFeatures.vue'
-import AppProducts from '@/components/AppProducts.vue'
-import AppIntro from '@/components/AppIntro.vue'
-import AppInvitation from '@/components/AppInvitation.vue'
+import { onUnmounted } from 'vue'
+import ShopCover from '@/components/ShopCover.vue'
+import ShopFeatures from '@/components/ShopFeatures.vue'
+import ShopListing from '@/components/ShopListing.vue'
+import ShopIntro from '@/components/ShopIntro.vue'
+import ShopBenefits from '@/components/ShopBenefits.vue'
 
-const page = usePageStore()
-
-onMounted(() => {
-  page.isMainPage = true
+defineProps({
+  collection: Array
 })
 
-onUnmounted(() => {
-  page.isMainPage = false
-})
+const emit = defineEmits(['resetInputs', 'subscribe'])
+
+const subs = defineModel('subs')
+
+onUnmounted(() => emit('resetInputs'))
 </script>
 
 <template>
   <main class="main">
-    <app-cover></app-cover>
-    <app-features></app-features>
-    <app-products></app-products>
-    <app-intro></app-intro>
-    <app-invitation></app-invitation>
+    <ShopCover />
+    <ShopFeatures />
+    <ShopListing :collection="collection" />
+    <ShopIntro />
+    <ShopBenefits @subscribe="$emit('subscribe', $event)" v-model:subs="subs" />
   </main>
 </template>
 
-<style lang="scss" scoped>
-@import '@/assets/scss/variables.scss';
-@import '@/assets/scss/fonts.scss';
-@import '@/assets/scss/mixinsAndExtensions.scss';
-</style>
+<style lang="scss" scoped></style>

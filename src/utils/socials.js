@@ -1,34 +1,39 @@
-const socials = [
+import LI from '@/images/socials/linkedin.svg'
+import FB from '@/images/socials/facebook.svg'
+import IG from '@/images/socials/instagram.svg'
+import Skype from '@/images/socials/skype.svg'
+import Twitter from '@/images/socials/twitter.svg'
+import Pinterest from '@/images/socials/pinterest.svg'
+
+export default [
   {
-    img: '/socials/linkedin.svg',
+    img: LI,
     alt: 'LinkedIn icon',
-    link: '#'
+    link: 'https://linkedin.com/'
   },
   {
-    img: '/socials/facebook.svg',
+    img: FB,
     alt: 'Facebook icon',
-    link: '#'
+    link: 'https://www.facebook.com/'
   },
   {
-    img: '/socials/instagram.svg',
+    img: IG,
     alt: 'Instagram icon',
-    link: '#'
+    link: 'https://www.instagram.com/meta'
   },
   {
-    img: '/socials/skype.svg',
+    img: Skype,
     alt: 'Skype icon',
-    link: '#'
+    link: 'https://www.skype.com/'
   },
   {
-    img: '/socials/twitter.svg',
+    img: Twitter,
     alt: 'Twitter icon',
-    link: '#'
+    link: 'https://twitter.com/Meta'
   },
   {
-    img: '/socials/pinterest.svg',
+    img: Pinterest,
     alt: 'Pinterest icon',
-    link: '#'
+    link: 'https://pinterest.com/'
   }
 ]
-
-export default socials

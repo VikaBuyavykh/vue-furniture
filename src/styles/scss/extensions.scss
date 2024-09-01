@@ -1,0 +1,84 @@
+%pic {
+  object-fit: cover;
+  object-position: center;
+}
+
+%bgi {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+%resetInputsAndBtns {
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+
+%sizing {
+  @include size(90%, auto);
+  max-width: 1280px;
+  margin: 0 auto;
+
+  @include media_xs {
+    width: 88%;
+  }
+}
+
+%grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+
+  @include media_xl {
+    grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+  }
+}
+
+%hoverOpacity {
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 0.2;
+  }
+}
+
+%hoverScale {
+  transition: scale 0.3s ease;
+
+  &:hover {
+    scale: 1.05;
+  }
+}
+
+%hoverShadow {
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 0 5px rgba(black, 0.2);
+    color: rgba($dark-primary, 0.7);
+  }
+}
+
+%deleteX {
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+  }
+}
+
+%deleteArrows {
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
+  &,
+  &:hover,
+  &:focus {
+    appearance: none;
+    -moz-appearance: textfield;
+  }
+}

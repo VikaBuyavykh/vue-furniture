@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+    <symbol id="svg">
+        <rect width="16" height="16" fill="transparent" style="mix-blend-mode:multiply"/>
+        <path d="M14 3H2V4H14V3Z" fill="currentColor"/>
+        <path d="M14 12H2V13H14V12Z" fill="currentColor"/>
+        <path d="M14 6H2V7H14V6Z" fill="currentColor"/>
+        <path d="M14 9H2V10H14V9Z" fill="currentColor"/>
+    </symbol>
+</svg>
