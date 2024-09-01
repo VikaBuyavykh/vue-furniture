@@ -1,35 +1,46 @@
-# vue-furniture
+# Project Avion
 
-This template should help get you started developing with Vue 3 in Vite.
+Проект представляет собой онлайн-магазин мебели и декора. В приложении доступны:
 
-## Recommended IDE Setup
+- регистрация и авторизация пользователя
+- редактирование профиля
+- просмотр товаров, их фильтрация, сортировка и поиск по названию
+- добавление товара в корзину, удаление из нее, оформление заказа
+- подписка на рассылку
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Tools
 
-## Customize configuration
+Страница адаптивная, в ней используется семантическая Desctop First верстка. Код написан на Vue 3, реализованы следующие инструменты:
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+- Сomposition API и Script Setup
+- компонентный подход, работа с реактивностью, отслеживанием, computed
+- макросы компиляции: defineProps, defineEmits, defineModel, defineExpose
+- работа с формами и асинхронным кодом
+- хуки жизненного цикла
+- Composables
+- Pinia store, localStorage
+- маршрутизация с Vue Router, Navigation Guards
 
-## Project Setup
+## Стек технологий
 
-```sh
-npm install
-```
+- Vue 3
+- Vite
+- Composition API
+- Pinia store
+- Vue Router
+- Axios
+- БЭМ
+- SCSS
+- Figma
+- Perfect Pixel
+- ESLint
+- Prettier
 
-### Compile and Hot-Reload for Development
+## Ссылки на проект
 
-```sh
-npm run dev
-```
+[Ссылка на макет](https://www.figma.com/design/MMsgDyxk277EUjdWH65XQ2/Avion?node-id=119-3383&m=dev&t=EVFD8QVIip9dKf0J-1)
+[Деплой](https://avion-shop-seven.vercel.app/)
 
-### Compile and Minify for Production
+## Ссылки на проект
 
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+В ближайшей перспективе планирую добавить историю заказов в профиль и актуализировать ссылки в футере (сейчас там по большей части стоят заглушки)
