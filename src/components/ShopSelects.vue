@@ -71,11 +71,11 @@ const closeIcon = computed(() => {
       appearance: none;
       padding-block: 16px;
       background-color: $light-gray;
-    }
 
-    select .selects--item-normal {
-      text-align: center !important;
-      color: $dark-primary !important;
+      option {
+        text-align: center;
+        color: $dark-primary;
+      }
     }
 
     &-wrapper {

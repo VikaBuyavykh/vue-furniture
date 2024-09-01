@@ -1,11 +1,15 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import deliveryImage from '@/images/icons/delivery-white.svg'
 
 const isReminderOpened = ref(true)
 function closeReminder() {
   isReminderOpened.value = false
 }
+
+const closeIcon = computed(() => {
+  return new URL(`/src/images/icons/login.svg#svg`, import.meta.url).href
+})
 </script>
 
 <template>
@@ -20,7 +24,7 @@ function closeReminder() {
         viewBox="0 0 32 32"
         fill="none"
       >
-        <use href="/src/images/icons/close.svg#svg" />
+        <use :href="closeIcon" />
       </svg>
     </section>
   </Transition>
