@@ -73,7 +73,7 @@ const closeIcon = computed(() => {
       background-color: $light-gray;
     }
 
-    &-nomal {
+    select .selects--item-normal {
       text-align: center !important;
       color: $dark-primary !important;
     }
