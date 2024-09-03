@@ -8,9 +8,11 @@ export function useWindowSize() {
     width.value = window.innerWidth
   }
 
-  onMounted(() => window.addEventListener('resize', trottle(resize)))
+  const trottledResize = trottle(resize)
 
-  onUnmounted(() => window.removeEventListener('resize', trottle(resize)))
+  onMounted(() => window.addEventListener('resize', trottledResize))
+
+  onUnmounted(() => window.removeEventListener('resize', trottledResize))
 
   return {
     width
