@@ -25,7 +25,9 @@ const repeatedPassword = defineModel('repeatedPassword')
 
 function handleFormInput(e) {
   emit('resetApiError')
-  checkFormValidity(e)
+  setTimeout(() => {
+    checkFormValidity(e)
+  }, 0)
 }
 
 onUnmounted(() => emit('reset'))

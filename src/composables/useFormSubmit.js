@@ -54,7 +54,7 @@ export function useFormSubmit() {
       })
       successfullAuthorization(data, 'You have successfully logged in')
     } catch (error) {
-      if (error.status === 401) {
+      if (error.request.status === 401) {
         apiError.value = 'Email address or password is incorrect'
       } else {
         apiError.value = 'Something went wrong. Please try again later or contact us'
@@ -79,7 +79,7 @@ export function useFormSubmit() {
     } catch (error) {
       if (error.name === 'custom') {
         apiError.value = error.message
-      } else if (error.status === 401) {
+      } else if (error.request.status === 401) {
         apiError.value = 'A user with the same email already exists'
       } else {
         apiError.value = 'Something went wrong. Please try again later or contact us'
