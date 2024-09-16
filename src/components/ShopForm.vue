@@ -215,7 +215,8 @@ onUnmounted(() => emit('reset'))
   }
 
   &--input-error {
-    @include size(100%, 19.6px);
+    @include size(100%, auto);
+    min-height: 19.6px;
 
     @include media_md {
       text-align: left;
@@ -223,7 +224,12 @@ onUnmounted(() => emit('reset'))
   }
 
   &--api-error {
-    @include size(50%, 19.6px);
+    @include size(100%, auto);
+    min-height: 19.6px;
+
+    @include media_md {
+      text-align: center;
+    }
   }
 
   &--button {
